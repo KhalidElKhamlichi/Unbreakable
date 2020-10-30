@@ -43,5 +43,6 @@ public class PlayerManager : MonoBehaviour
 
     public void attack() {
         weapon?.attack();
+        weapon = null;
     }
 }
