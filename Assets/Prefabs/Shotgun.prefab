@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 481358426653487481}
   - component: {fileID: 481358426653487483}
   - component: {fileID: 481358426653487482}
-  - component: {fileID: 7658332134839728198}
-  - component: {fileID: -3947846658923832456}
+  - component: {fileID: -1757618465398194477}
+  - component: {fileID: 606640969}
   m_Layer: 0
-  m_Name: Pistol
+  m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -7837294106855103285, guid: 0d65a56236bbb2d4fac3010237b32b0b, type: 3}
+  m_Sprite: {fileID: 2180132427667755168, guid: 0d65a56236bbb2d4fac3010237b32b0b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 1037148256250830665, guid: eeb453a80ed7d8a4b8bbb2a4e957ed66, type: 3}
   damage: 10
---- !u!114 &7658332134839728198
+--- !u!114 &-1757618465398194477
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,12 +109,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 481358426653487480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df6a9bc90f014c7582a74d77c9f8a35a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5472c553acf441d40bb4d7d4e524bdd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpread: 0.2
   projSpeed: 500
---- !u!58 &-3947846658923832456
+  nbrOfProjectiles: 3
+  spreadAngle: 30
+--- !u!58 &606640969
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -8,6 +8,7 @@ public class Firearm : MonoBehaviour, Weapon {
     
     private Transform emissionPoint;
     private FiringStrategy firingStrategy;
+    private bool pickable = true;
 
     private void Start() {
         emissionPoint = transform.GetChild(0);
@@ -21,5 +22,18 @@ public class Firearm : MonoBehaviour, Weapon {
 
     public int getDamage() {
        return damage;
+    }
+
+    public void setPickable(bool pickable) {
+        this.pickable = pickable;
+        Invoke(nameof(resetPickable), 1f);
+    }
+
+    public bool isPickable() {
+        return pickable;
+    }
+    
+    private void resetPickable() {
+        pickable = true;
     }
 }

@@ -4,8 +4,8 @@ public class Pistol : MonoBehaviour, FiringStrategy {
     
 //    public GameObject flash;
 //    public AudioClip clip;
-    public float projectileSpread = 0.2f;
-    public float projSpeed = 500.0f;
+    [SerializeField] private float projectileSpread = 0.2f;
+    [SerializeField] private float projSpeed = 500.0f;
 //    public float screenShakeAmnt;
 //    public float screenShakeDur;
 	

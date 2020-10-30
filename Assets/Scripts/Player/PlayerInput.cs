@@ -14,5 +14,9 @@ public class PlayerInput : MonoBehaviour
         playerManager.setDirectionalInput(directionalInput);
 
         if (Input.GetButton("Fire1")) playerManager.attack();
+        
+        if (Input.GetButton("Interact")) playerManager.dropWeapon();
+        
+        
     }
 }
