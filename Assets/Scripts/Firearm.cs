@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Firearm : MonoBehaviour, Weapon {
     [SerializeField] private GameObject projectile;
-    [SerializeField] private int damage;
     
     private Transform emissionPoint;
     private FiringStrategy firingStrategy;
@@ -18,10 +17,6 @@ public class Firearm : MonoBehaviour, Weapon {
     public void attack() {
         firingStrategy.shoot(projectile, emissionPoint);
         Destroy(gameObject);
-    }
-
-    public int getDamage() {
-       return damage;
     }
 
     public void setPickable(bool pickable) {

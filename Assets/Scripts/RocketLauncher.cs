@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Pistol : MonoBehaviour, FiringStrategy {
+public class RocketLauncher : MonoBehaviour, FiringStrategy {
     
 //    public GameObject flash;
 //    public AudioClip clip;

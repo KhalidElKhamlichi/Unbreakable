@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7658332134839728198}
   - component: {fileID: -3947846658923832456}
   m_Layer: 0
-  m_Name: Pistol
+  m_Name: Rocket Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,8 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb3f6c302d1dbb43b528dd67625f06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 1037148256250830665, guid: eeb453a80ed7d8a4b8bbb2a4e957ed66, type: 3}
-  damage: 10
+  projectile: {fileID: 4178489613852671165, guid: 169b280d493c4fa4ea28d2c4124bea56, type: 3}
 --- !u!114 &7658332134839728198
 MonoBehaviour:
   m_ObjectHideFlags: 0
