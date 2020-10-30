@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface FiringStrategy {
-    void shoot();
+    void shoot(GameObject projectile, Transform emissionPoint);
 }
