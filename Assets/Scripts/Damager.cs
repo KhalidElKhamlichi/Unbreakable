@@ -5,4 +5,5 @@ using UnityEngine;
 public interface Damager 
 {
     int getDamage();
+    float getKnockbackForce();
 }

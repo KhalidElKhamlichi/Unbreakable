@@ -84,7 +84,7 @@ public class PlayerManager : MonoBehaviour
         if (weapon != null) {
             weapon.setPickable(false);
             weaponGameObject.transform.parent = null;
-            weaponGameObject.transform.DOJump(transform.right * 1.5f, 2, 1, .5f, false); 
+            weaponGameObject.transform.DOJump(transform.position + transform.right * 2f, 2, 1, .5f, false); 
             unreferenceWeapon();
         }
     }

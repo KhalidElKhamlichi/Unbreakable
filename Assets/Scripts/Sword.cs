@@ -17,6 +17,10 @@ public class Sword : MonoBehaviour, Weapon, Damager
         return damage;
     }
 
+    public float getKnockbackForce() {
+        throw new System.NotImplementedException();
+    }
+
     public void setPickable(bool pickable) {
         this.pickable = pickable;
         Invoke(nameof(resetPickable), 1f);
