@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
         rbody.MovePosition(rbody.position + moveAmount * Time.fixedDeltaTime);
     }
 
-    public void knockback(Vector2 knockbackVelocity) {
+    public void knockback(Vector2 knockbackVelocity, float duration) {
 //        rbody.AddForce(knockbackVelocity, ForceMode2D.Impulse); 
-        rbody.DOMove((Vector2)transform.position + knockbackVelocity, .3f);
+        rbody.DOMove((Vector2)transform.position + knockbackVelocity, duration);
     }
 }

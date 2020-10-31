@@ -74,8 +74,9 @@ public class PlayerManager : MonoBehaviour
     }
 	
     private void calculateVelocity() {
-        velocity.x = directionalInput.x * moveSpeed;
-        velocity.y = directionalInput.y * moveSpeed;;
+        Vector2 direction = Vector2.ClampMagnitude(directionalInput	, 1f);
+        velocity.x = direction.x * moveSpeed;
+        velocity.y = direction.y * moveSpeed;
     }
 
     public void attack() {
@@ -104,7 +105,7 @@ public class PlayerManager : MonoBehaviour
 			
         StartCoroutine(collisionManager.disableCollisionWith(collider2D.tag, invincibilityAfterHurtTime));
 			
-        Invoke(nameof(unsetIsKnockedback), invincibilityAfterHurtTime/2);
+        Invoke(nameof(unsetIsKnockedback), invincibilityAfterHurtTime/4);
 			
         float? knockbackForce = collider2D.gameObject.GetComponent<Damager>()?.getKnockbackForce();
         if (!knockbackForce.HasValue) return;
@@ -112,7 +113,7 @@ public class PlayerManager : MonoBehaviour
         collisionDirection.Normalize();
         Vector2 knockbackVelocity = collisionDirection * new Vector2(knockbackForce.Value, Mathf.Abs(knockbackForce.Value/2));
 //        velocity = knockbackVelocity;
-        controller.knockback(knockbackVelocity);
+        controller.knockback(knockbackVelocity, invincibilityAfterHurtTime/4);
 
 //        StartCoroutine(vibrateGamepad(.3f));
     }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rocket : MonoBehaviour {
+public class Rocket : MonoBehaviour, Damager {
     
     [SerializeField] private int radius;
     [SerializeField] private GameObject explosionEffect;
@@ -20,5 +20,13 @@ public class Rocket : MonoBehaviour {
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere (transform.position, radius);
+    }
+
+    public int getDamage() {
+        throw new NotImplementedException();
+    }
+
+    public float getKnockbackForce() {
+        throw new NotImplementedException();
     }
 }

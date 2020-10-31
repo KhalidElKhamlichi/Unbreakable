@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private Image hpBar;
     [SerializeField] private Image hpBarDecay;
     [SerializeField] private float hpDecaySpeed;
+    [SerializeField] private TextMeshProUGUI currencyText;
 
     private Lifecycle life;
 
@@ -28,6 +30,8 @@ public class UIManager : MonoBehaviour {
         hpBar.fillAmount = newHP / maxHP;
         hpBarDecay.fillAmount = (hpBarDecay.fillAmount <= hpBar.fillAmount) ? hpBar.fillAmount : hpBarDecay.fillAmount - hpDecaySpeed;
     }
-	
-	 
+    
+    public void	 updateCurrency(int currentCurrency) {
+        currencyText.text = currentCurrency.ToString();
+    }
 }

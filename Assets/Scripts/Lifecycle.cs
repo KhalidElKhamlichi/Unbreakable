@@ -5,7 +5,7 @@ using UnityEngine;
 public class Lifecycle : MonoBehaviour {
     [SerializeField] int maxHP;
     
-    private event Action deathEvent;
+    private event Action<GameObject> deathEvent;
     private int currentHP;
 
     protected virtual void Start() {
@@ -13,7 +13,7 @@ public class Lifecycle : MonoBehaviour {
         GetComponent<CollisionManager>().onHit(takeDamage);
     }
 
-    public void onDeath(Action onDeath) {
+    public void onDeath(Action<GameObject> onDeath) {
         deathEvent += onDeath;
     }
 
@@ -27,7 +27,7 @@ public class Lifecycle : MonoBehaviour {
 
     private void checkLife() {
         if (currentHP <= 0) {
-            deathEvent?.Invoke();
+            deathEvent?.Invoke(gameObject);
             onDeath();
         }
     }
@@ -42,5 +42,9 @@ public class Lifecycle : MonoBehaviour {
 
     public float getMaxHp() {
         return maxHP;
+    }
+
+    private void OnDestroy() {
+        deathEvent?.Invoke(gameObject);
     }
 }
