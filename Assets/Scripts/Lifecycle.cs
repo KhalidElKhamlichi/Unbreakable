@@ -28,6 +28,7 @@ public class Lifecycle : MonoBehaviour {
     private void checkLife() {
         if (currentHP <= 0) {
             deathEvent?.Invoke(gameObject);
+            deathEvent = null;
             onDeath();
         }
     }
