@@ -138,14 +138,17 @@ GameObject:
   - component: {fileID: 6403872488111400087}
   - component: {fileID: 6403872488111400104}
   - component: {fileID: 6403872488111400105}
+  - component: {fileID: 1608574372}
   - component: {fileID: 6403872488111400106}
   - component: {fileID: 6403872488111400107}
   - component: {fileID: 6403872488111400085}
   - component: {fileID: 1608574371}
-  - component: {fileID: 1608574372}
+  - component: {fileID: 1608574364}
+  - component: {fileID: 1608574365}
+  - component: {fileID: 1608574375}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -185,7 +188,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5bd7931e62521cd45906e7c7c13aa3a3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -257,6 +260,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!61 &1608574372
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6403872488111400108}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.032025337, y: 0.00000047683716}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.625, y: 2.625}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.1518347, y: 2.53959}
+  m_EdgeRadius: 0
 --- !u!114 &6403872488111400106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +313,7 @@ MonoBehaviour:
   moveSpeed: 400
   weaponGameObject: {fileID: 6403872486959499815}
   weaponWrapper: {fileID: 7642863093868372620}
+  invincibilityAfterHurtTime: 1.2
 --- !u!114 &6403872488111400085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,32 +339,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponWrapper: {fileID: 7642863093868372620}
---- !u!61 &1608574372
-BoxCollider2D:
+--- !u!114 &1608574364
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6403872488111400108}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.032025337, y: 0.00000047683716}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.625, y: 2.625}
-    newSize: {x: 0.16, y: 0.16}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.1518347, y: 2.53959}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a49054f4ba4786c42b1f17fc56fc2e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 500
+--- !u!114 &1608574365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6403872488111400108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a92085e95136e6c47a985bcd25799555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitTriggerTag: Enemy
+--- !u!114 &1608574375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6403872488111400108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff02a86ab1df7040bf055f990e0d6b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashTime: 0.2
+  numberOfFlashes: 5
 --- !u!1001 &6805221513907419999
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -344,11 +388,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 481358426653487480, guid: 2c8a14f1c5972b743a33d2b83839a2c9, type: 3}
       propertyPath: m_Name
-      value: Pistol
+      value: Rocket Launcher
       objectReference: {fileID: 0}
     - target: {fileID: 481358426653487480, guid: 2c8a14f1c5972b743a33d2b83839a2c9, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 481358426653487481, guid: 2c8a14f1c5972b743a33d2b83839a2c9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -396,7 +440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6497057828448153267, guid: 2c8a14f1c5972b743a33d2b83839a2c9, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c8a14f1c5972b743a33d2b83839a2c9, type: 3}

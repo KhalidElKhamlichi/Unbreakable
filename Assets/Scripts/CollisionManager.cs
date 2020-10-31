@@ -5,11 +5,10 @@ using UnityEngine;
 public class CollisionManager : MonoBehaviour {
     [SerializeField] string hitTriggerTag;
     private event Action<Collider2D> hitEvent;
+    private string ignoreTag = string.Empty;
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag.Equals(hitTriggerTag)) {
-            hitEvent?.Invoke(other);
-        }
+        invokeHitEvent(other);
     }
         
     private void OnTriggerStay2D(Collider2D other) {
@@ -17,20 +16,17 @@ public class CollisionManager : MonoBehaviour {
     }
 
     private void invokeHitEvent(Collider2D other) {
-        if (other.tag.Equals(hitTriggerTag)) {
+        if (other.tag.Equals(hitTriggerTag) && !ignoreTag.Equals(other.tag)) {
             hitEvent?.Invoke(other);
         }
     }
         
-    public IEnumerator disableCollisionWith(int layer, float duration)
-    {
-        Physics2D.IgnoreLayerCollision(gameObject.layer, 9, true);
-        Physics2D.IgnoreLayerCollision(gameObject.layer, 12, true);
+    public IEnumerator disableCollisionWith(string tag, float duration) {
+        ignoreTag = tag;
 			
         yield return new WaitForSeconds(duration);
 
-        Physics2D.IgnoreLayerCollision(gameObject.layer, 9, false);
-        Physics2D.IgnoreLayerCollision(gameObject.layer, 12, false);
+        ignoreTag = string.Empty;
     }
 
     public void onHit(Action<Collider2D> onHit) => hitEvent += onHit;

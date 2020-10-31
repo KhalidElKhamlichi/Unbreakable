@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 481358426653487482}
   - component: {fileID: -1757618465398194477}
   - component: {fileID: 606640969}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5072341822813065245}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Emission point
   m_TagString: Untagged
   m_Icon: {fileID: 0}

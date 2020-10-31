@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7253629782911396671}
   - component: {fileID: 2122579836}
   - component: {fileID: 2122579837}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Claymore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8364724251841348631}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fake emission point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
