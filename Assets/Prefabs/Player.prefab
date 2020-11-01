@@ -270,7 +270,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.032025337, y: 0.00000047683716}
@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 517ad3f6ddcf6f343ae3751decb901bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 400
+  moveSpeed: 10
   weaponGameObject: {fileID: 6403872486959499815}
   weaponWrapper: {fileID: 7642863093868372620}
   invincibilityAfterHurtTime: 1.2
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a49054f4ba4786c42b1f17fc56fc2e56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 500
+  maxHP: 100
 --- !u!114 &1608574365
 MonoBehaviour:
   m_ObjectHideFlags: 0

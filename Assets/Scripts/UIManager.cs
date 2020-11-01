@@ -13,17 +13,19 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI timerText;
 
     private Lifecycle life;
+    private GameManager gameManager;
 
-    void Start ()
-    {
+    void Start () {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         life = player.GetComponent<Lifecycle>();
+        gameManager = GetComponent<GameManager>();
     }
 
     private void Update()
     {
         //TODO remove from update to event
         updateHpBar(life.getCurrentHp(), life.getMaxHp());
+        updateCurrency();
     }
 
     private void updateHpBar(float newHP, float maxHP)
@@ -32,8 +34,8 @@ public class UIManager : MonoBehaviour {
         hpBarDecay.fillAmount = (hpBarDecay.fillAmount <= hpBar.fillAmount) ? hpBar.fillAmount : hpBarDecay.fillAmount - hpDecaySpeed;
     }
     
-    public void	 updateCurrency(int currentCurrency) {
-        currencyText.text = currentCurrency.ToString();
+    private void updateCurrency() {
+        currencyText.text = GameManager.getCurrencyAmount().ToString();
     }
 
     public void	 updateWaveTimer(float timer) {

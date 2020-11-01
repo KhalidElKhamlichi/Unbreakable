@@ -65,7 +65,7 @@ public class WaveManager : MonoBehaviour {
     }
     
     private Transform pickSpawnLocation() {
-        int index = Random.Range(0, spawnLocations.childCount+1);
+        int index = Random.Range(0, spawnLocations.childCount);
         return spawnLocations.GetChild(index);
     }
 }

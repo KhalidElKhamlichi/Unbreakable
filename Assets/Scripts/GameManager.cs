@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
     [SerializeField] private UIManager uiManager;
     
-    private int currentCurrency;
+    public static int currentCurrency;
 
     public void subscribeToEnemyDeath(GameObject enemy) {
         enemy.GetComponent<Lifecycle>().onDeath(addCurrency);
@@ -13,7 +13,13 @@ public class GameManager : MonoBehaviour {
 
     private void addCurrency(GameObject obj) {
         currentCurrency += obj.GetComponent<CurrencyDrop>().getCurrencyAmount();
-        uiManager.updateCurrency(currentCurrency);
-        
+//        uiManager.updateCurrency(currentCurrency);
+    }
+
+    public static void reduceCurrency(int value) {
+        currentCurrency -= value;
+    }
+    public static int getCurrencyAmount() {
+        return currentCurrency;
     }
 }

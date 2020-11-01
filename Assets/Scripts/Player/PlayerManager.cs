@@ -18,6 +18,7 @@ public class PlayerManager : MonoBehaviour
     private Weapon weapon;
     private AimAtMouse aimAtMouse;
     private CollisionManager collisionManager;
+    private Interactable interactable;
     private bool isKnockedback;
     private bool isDashing;
     
@@ -47,12 +48,18 @@ public class PlayerManager : MonoBehaviour
         if (other.gameObject.GetComponent<Weapon>() != null) {
             if(other.gameObject.GetComponent<Weapon>().isPickable()) pickUpWeapon(other.gameObject);
         }
+//        if (other.gameObject.GetComponent<Interactable>() != null) {
+//            interactable = other.gameObject.GetComponent<Interactable>();
+//        }
     }
 
     private void pickUpWeapon(GameObject weaponToPickUp) {
         if (weapon == null) {
-            print("Weapon picked up");
             weaponGameObject = weaponToPickUp;
+//            weaponGameObject.transform.position = Vector3.zero;
+//            weaponGameObject.transform.localPosition = Vector3.zero;
+//            weaponGameObject.transform.rotation = Quaternion.identity;
+//            weaponGameObject.transform.localRotation = Quaternion.identity;
             weaponGameObject.transform.position = weaponWrapper.position;
             weaponGameObject.transform.rotation = weaponWrapper.rotation;
 //            weaponGameObject.transform.localPosition = Vector2.zero;
@@ -96,6 +103,13 @@ public class PlayerManager : MonoBehaviour
             weaponGameObject.transform.DOJump(transform.position + transform.right * 2f, 2, 1, .5f, false); 
             unreferenceWeapon();
         }
+    }
+
+    public void interact() {
+        interactable?.interact();
+    }
+    public void setInteractable(Interactable interactable) {
+        this.interactable = interactable;
     }
     
     private void reactToHit(Collider2D collider2D) {
