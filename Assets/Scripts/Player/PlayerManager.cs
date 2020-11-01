@@ -21,13 +21,19 @@ public class PlayerManager : MonoBehaviour
     private Interactable interactable;
     private bool isKnockedback;
     private bool isDashing;
+    private SpriteRenderer spriteRenderer;
     
-    private static readonly int HorizontalVelocity = Animator.StringToHash("horizontalVelocity");
-    private static readonly int VerticalVelocity = Animator.StringToHash("verticalVelocity");
+    private static readonly int HorizontalVelocity = Animator.StringToHash("HorizontalVelocity");
+    private static readonly int VerticalVelocity = Animator.StringToHash("VerticalVelocity");
+    private static readonly int HorizontalLook = Animator.StringToHash("HorizontalLook");
+    private static readonly int VerticalLook = Animator.StringToHash("VerticalLook");
+    private static readonly int Moving = Animator.StringToHash("Moving");
+    private static readonly int HasWeapon = Animator.StringToHash("HasWeapon");
 
     private void OnEnable() {
         aimAtMouse = GetComponent<AimAtMouse>();
         aimAtMouse.setWeapon(weaponGameObject);
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Start() {
@@ -56,22 +62,25 @@ public class PlayerManager : MonoBehaviour
     private void pickUpWeapon(GameObject weaponToPickUp) {
         if (weapon == null) {
             weaponGameObject = weaponToPickUp;
-//            weaponGameObject.transform.position = Vector3.zero;
-//            weaponGameObject.transform.localPosition = Vector3.zero;
-//            weaponGameObject.transform.rotation = Quaternion.identity;
-//            weaponGameObject.transform.localRotation = Quaternion.identity;
             weaponGameObject.transform.position = weaponWrapper.position;
             weaponGameObject.transform.rotation = weaponWrapper.rotation;
-//            weaponGameObject.transform.localPosition = Vector2.zero;
             weaponGameObject.transform.parent = weaponWrapper;
             weapon = weaponGameObject.GetComponent<Weapon>();
+            weapon.pickUp();
             aimAtMouse.setWeapon(weaponGameObject);
         }
     }
 
     private void animate() {
-        animator.SetInteger(HorizontalVelocity, (int)velocity.x);
-        animator.SetInteger(VerticalVelocity, (int)velocity.y);
+        animator.SetFloat(HorizontalVelocity, Math.Sign(velocity.x));
+        animator.SetFloat(VerticalVelocity, Math.Sign(velocity.y));
+        bool isMoving = velocity.magnitude > 0;
+        animator.SetBool(Moving, isMoving);
+        animator.SetBool(HasWeapon, weapon != null);
+        Vector3 lookDirection = aimAtMouse.getLookDirection();
+        spriteRenderer.flipX = lookDirection.x < 0;
+        animator.SetFloat(HorizontalLook, Math.Sign(lookDirection.x));
+        animator.SetFloat(VerticalLook, Math.Sign(lookDirection.y));
     }
 
     public void setDirectionalInput(Vector2 input) {
@@ -99,6 +108,7 @@ public class PlayerManager : MonoBehaviour
     public void dropWeapon() {
         if (weapon != null) {
             weapon.setPickable(false);
+            weapon.drop();
             weaponGameObject.transform.parent = null;
             weaponGameObject.transform.DOJump(transform.position + transform.right * 2f, 2, 1, .5f, false); 
             unreferenceWeapon();

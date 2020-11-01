@@ -9,6 +9,7 @@ public class AimAtMouse : MonoBehaviour {
     private Camera camera;
     private Transform emissionPoint;
     private Quaternion lastWeaponRotation;
+    private Vector3 lookDir;
     private void Start() {
         spriteRenderer = weapon.GetComponent<SpriteRenderer>();
         camera = Camera.main;
@@ -17,7 +18,7 @@ public class AimAtMouse : MonoBehaviour {
 
     void Update() {
         float angle = getRotationAngle();
-        weaponWrapper.transform.RotateAround(transform.position, Vector3.forward, angle - tempAngle);
+        weaponWrapper.transform.RotateAround(weaponWrapper.transform.position, Vector3.forward, angle - tempAngle);
         tempAngle = angle;
         adjustWeaponSpriteDirection();
     }
@@ -30,8 +31,8 @@ public class AimAtMouse : MonoBehaviour {
     }
 
     private float getRotationAngle() {
-        Vector3 dir = Input.mousePosition - camera.WorldToScreenPoint(weaponWrapper.transform.position);
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        lookDir = Input.mousePosition - camera.WorldToScreenPoint(weaponWrapper.transform.position);
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         return angle;
     }
 
@@ -39,6 +40,12 @@ public class AimAtMouse : MonoBehaviour {
         if(!weapon) return;
         spriteRenderer.flipY = weapon.transform.rotation.eulerAngles.z < 270 && weapon.transform.rotation.eulerAngles.z > 90;
         float newEmissionY = spriteRenderer.flipY ? -.2f : .3f;
+        float newWrapperX = spriteRenderer.flipY ? .48f : -.48f;
         emissionPoint.localPosition = new Vector3(emissionPoint.localPosition.x, newEmissionY);
+        weaponWrapper.localPosition = new Vector2(newWrapperX, weaponWrapper.localPosition.y);
+    }
+
+    public Vector3 getLookDirection() {
+        return lookDir;
     }
 }

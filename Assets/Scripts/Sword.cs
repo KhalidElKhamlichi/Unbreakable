@@ -26,6 +26,14 @@ public class Sword : MonoBehaviour, Weapon, Damager
         Invoke(nameof(resetPickable), 1f);
     }
 
+    public void pickUp() {
+        throw new System.NotImplementedException();
+    }
+
+    public void drop() {
+        throw new System.NotImplementedException();
+    }
+
     public bool isPickable() {
         return pickable;
     }

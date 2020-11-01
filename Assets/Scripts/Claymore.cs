@@ -6,9 +6,13 @@ public class Claymore : MonoBehaviour, Weapon
     
     [SerializeField] private int radius;
     [SerializeField] private GameObject explosionEffect;
+    [SerializeField] private Sprite spriteWithArms;
+    [SerializeField] private Sprite spriteWithoutArms;
 
+    private SpriteRenderer spriteRenderer;
     private bool pickable = true;
     private bool isActive;
+    
     private void OnTriggerEnter2D(Collider2D other) {
         if (!isActive || !other.CompareTag("Enemy")) return;
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, radius);
@@ -39,5 +43,13 @@ public class Claymore : MonoBehaviour, Weapon
     public void setPickable(bool pickable) {
         this.pickable = pickable;
         if(!pickable) isActive = true;
+    }
+
+    public void pickUp() {
+        spriteRenderer.sprite = spriteWithArms;
+    }
+
+    public void drop() {
+        spriteRenderer.sprite = spriteWithoutArms;
     }
 }
