@@ -5,11 +5,19 @@ using UnityEngine;
 public class Sword : MonoBehaviour, Weapon, Damager
 {
     [SerializeField] private int damage;
+    [SerializeField] private Sprite spriteWithArms;
+    [SerializeField] private Sprite spriteWithoutArms;
     
     private bool pickable = true;
+    private SpriteRenderer spriteRenderer;
+    
+    private void Start() {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
     
     public void attack() {
         GetComponent<Collider2D>().enabled = true;
+        
         Destroy(gameObject, .5f);
     }
 
@@ -18,7 +26,7 @@ public class Sword : MonoBehaviour, Weapon, Damager
     }
 
     public float getKnockbackForce() {
-        throw new System.NotImplementedException();
+        return 50;
     }
 
     public void setPickable(bool pickable) {
@@ -27,11 +35,13 @@ public class Sword : MonoBehaviour, Weapon, Damager
     }
 
     public void pickUp() {
-        throw new System.NotImplementedException();
+        spriteRenderer.sprite = spriteWithArms;
+        GetComponent<CapsuleCollider2D>().enabled = false;
     }
 
     public void drop() {
-        throw new System.NotImplementedException();
+        spriteRenderer.sprite = spriteWithoutArms;
+        GetComponent<CapsuleCollider2D>().enabled = false;
     }
 
     public bool isPickable() {

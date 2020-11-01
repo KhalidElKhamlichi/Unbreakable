@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private GameObject weaponGameObject;
     [SerializeField] private Transform weaponWrapper;
+    [SerializeField] private Transform swordWrapper;
     [SerializeField] private float invincibilityAfterHurtTime;
 
     private PlayerController controller;
@@ -54,18 +55,16 @@ public class PlayerManager : MonoBehaviour
         if (other.gameObject.GetComponent<Weapon>() != null) {
             if(other.gameObject.GetComponent<Weapon>().isPickable()) pickUpWeapon(other.gameObject);
         }
-//        if (other.gameObject.GetComponent<Interactable>() != null) {
-//            interactable = other.gameObject.GetComponent<Interactable>();
-//        }
     }
 
     private void pickUpWeapon(GameObject weaponToPickUp) {
         if (weapon == null) {
             weaponGameObject = weaponToPickUp;
-            weaponGameObject.transform.position = weaponWrapper.position;
-            weaponGameObject.transform.rotation = weaponWrapper.rotation;
-            weaponGameObject.transform.parent = weaponWrapper;
             weapon = weaponGameObject.GetComponent<Weapon>();
+            Transform wrapper = weapon is Sword ? swordWrapper : weaponWrapper;
+            weaponGameObject.transform.position = wrapper.position;
+            weaponGameObject.transform.rotation = wrapper.rotation;
+            weaponGameObject.transform.parent = wrapper;
             weapon.pickUp();
             aimAtMouse.setWeapon(weaponGameObject);
         }

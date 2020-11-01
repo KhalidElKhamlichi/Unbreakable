@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class AimAtMouse : MonoBehaviour {
     
     [SerializeField] private Transform weaponWrapper;
+    [SerializeField] private Transform swordWrapper;
     private GameObject weapon;
     private float tempAngle;
     private SpriteRenderer spriteRenderer;
@@ -38,11 +40,19 @@ public class AimAtMouse : MonoBehaviour {
 
     private void adjustWeaponSpriteDirection() {
         if(!weapon) return;
-        spriteRenderer.flipY = weapon.transform.rotation.eulerAngles.z < 270 && weapon.transform.rotation.eulerAngles.z > 90;
-        float newEmissionY = spriteRenderer.flipY ? -.2f : .3f;
-        float newWrapperX = spriteRenderer.flipY ? .48f : -.48f;
-        emissionPoint.localPosition = new Vector3(emissionPoint.localPosition.x, newEmissionY);
-        weaponWrapper.localPosition = new Vector2(newWrapperX, weaponWrapper.localPosition.y);
+        if (weapon.GetComponent<Weapon>() is Sword) {
+            spriteRenderer.flipX = Math.Sign(lookDir.x) < 0;
+            float newWrapperX = spriteRenderer.flipX ? -.48f : .48f;
+            swordWrapper.localPosition = new Vector2(newWrapperX, swordWrapper.localPosition.y);
+        }
+        else {
+            spriteRenderer.flipY = weapon.transform.rotation.eulerAngles.z < 270 && weapon.transform.rotation.eulerAngles.z > 90;
+            float newEmissionY = spriteRenderer.flipY ? -.2f : .3f;
+            float newWrapperX = spriteRenderer.flipY ? .48f : -.48f;
+            emissionPoint.localPosition = new Vector3(emissionPoint.localPosition.x, newEmissionY);
+            weaponWrapper.localPosition = new Vector2(newWrapperX, weaponWrapper.localPosition.y);
+        }
+        
     }
 
     public Vector3 getLookDirection() {

@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4022488870988074631}
   - component: {fileID: 1409546042224642400}
-  - component: {fileID: 7253629782911396671}
-  - component: {fileID: 2122579836}
+  - component: {fileID: 2965623746993913520}
+  - component: {fileID: 6517855406230795368}
+  - component: {fileID: 3958749318999337490}
   m_Layer: 8
-  m_Name: Claymore
+  m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: b3cc612c7663cf142bbe3e1d87298c70, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 600112fb504b4244c8d3ce59af1a9f5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7253629782911396671
+--- !u!114 &2965623746993913520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,16 +95,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 1787050577222344598}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7d75eb6c7a64a448b1135a80806690f, type: 3}
+  m_Script: {fileID: 11500000, guid: 58fdf666f0a1b324f9d07a4d0a155fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
-  explosionEffect: {fileID: 5436445204578143464, guid: ed4bdf62c3a7b5b4a974155266604af1, type: 3}
-  spriteWithArms: {fileID: 21300000, guid: 568fe067c1b72c94f934d0014d08cc6b, type: 3}
-  spriteWithoutArms: {fileID: 21300000, guid: b3cc612c7663cf142bbe3e1d87298c70, type: 3}
-  fieldOfEffect: {fileID: 8078034867764505068, guid: 8d8fe6caaaf2a524fbbbf799bf3465ff, type: 3}
---- !u!58 &2122579836
-CircleCollider2D:
+  damage: 50
+  spriteWithArms: {fileID: 21300000, guid: 93cab057f29701b46a9fd236207c844f, type: 3}
+  spriteWithoutArms: {fileID: 21300000, guid: 600112fb504b4244c8d3ce59af1a9f5c, type: 3}
+--- !u!68 &6517855406230795368
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787050577222344598}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -1.5339154, y: -0.92421865}
+  - {x: -3.695118, y: -1.3334756}
+  - {x: -4.579377, y: -0.64837563}
+  - {x: -1.5495734, y: -0.0031106472}
+  - {x: -1.4491701, y: -0.33281326}
+  - {x: -1.4135814, y: -0.6401181}
+  - {x: -1.409123, y: -0.7784021}
+  - {x: -1.504455, y: -0.8895608}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
+--- !u!70 &3958749318999337490
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -116,8 +143,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.53
+  m_Size: {x: 4.24, y: 1.25}
+  m_Direction: 1
 --- !u!1 &2057944750168180178
 GameObject:
   m_ObjectHideFlags: 0
