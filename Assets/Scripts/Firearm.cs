@@ -2,46 +2,24 @@
 using System;
 using UnityEngine;
 
-public class Firearm : MonoBehaviour, Weapon {
+public class Firearm : Weapon {
     [SerializeField] private GameObject projectile;
-    [SerializeField] private Sprite spriteWithArms;
-    [SerializeField] private Sprite spriteWithoutArms;
-    [SerializeField] private bool pickable = true;
-    
+
     private Transform emissionPoint;
     private FiringStrategy firingStrategy;
-    private SpriteRenderer spriteRenderer;
+    private event Action onAttackEvent;
 
-    private void Start() {
+    protected override void Start() {
+        base.Start();
         emissionPoint = transform.GetChild(0);
         firingStrategy = GetComponent<FiringStrategy>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = pickable ? spriteWithoutArms : spriteWithArms;
     }
 
-    public void attack() {
+    public override void attack() {
         firingStrategy.shoot(projectile, emissionPoint);
+        onAttackEvent?.Invoke();
         Destroy(gameObject);
     }
 
-    public void setPickable(bool pickable) {
-        this.pickable = pickable;
-        Invoke(nameof(resetPickable), 1f);
-    }
-
-    public bool isPickable() {
-        return pickable;
-    }
-
-    public void pickUp() {
-        spriteRenderer.sprite = spriteWithArms;
-    }
-
-    public void drop() {
-        spriteRenderer.sprite = spriteWithoutArms;
-    }
-    
-    private void resetPickable() {
-        pickable = true;
-    }
+    public void onAttack(Action action) => onAttackEvent += action;
 }

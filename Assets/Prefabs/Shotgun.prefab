@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 481358426653487482}
   - component: {fileID: -1757618465398194477}
   - component: {fileID: 606640969}
+  - component: {fileID: 8847420690589476523}
   m_Layer: 8
   m_Name: Shotgun
   m_TagString: Untagged
@@ -101,6 +102,9 @@ MonoBehaviour:
   projectile: {fileID: 1037148256250830665, guid: eeb453a80ed7d8a4b8bbb2a4e957ed66, type: 3}
   spriteWithArms: {fileID: 21300000, guid: 2a8e287c2df0b384ea5567fe2ef9b9ca, type: 3}
   spriteWithoutArms: {fileID: 21300000, guid: 5145ab5c4234c5c419575b2868f3065b, type: 3}
+  pickable: 1
+  screenShakeAmnt: 0.08
+  screenShakeDur: 0.04
 --- !u!114 &-1757618465398194477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpread: 0.2
-  projSpeed: 700
+  projSpeed: 1000
   nbrOfProjectiles: 6
   spreadAngle: 15
 --- !u!58 &606640969
@@ -133,6 +137,18 @@ CircleCollider2D:
   m_Offset: {x: 0.02230072, y: 0}
   serializedVersion: 2
   m_Radius: 1.124855
+--- !u!114 &8847420690589476523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481358426653487480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc97a660fe1e64648b8ee1a1da37ec6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6497057828448153267
 GameObject:
   m_ObjectHideFlags: 0

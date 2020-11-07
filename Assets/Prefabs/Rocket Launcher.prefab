@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 481358426653487482}
   - component: {fileID: 7658332134839728198}
   - component: {fileID: -3947846658923832456}
+  - component: {fileID: 2345888200324579484}
   m_Layer: 8
   m_Name: Rocket Launcher
   m_TagString: Untagged
@@ -102,6 +103,8 @@ MonoBehaviour:
   spriteWithArms: {fileID: 21300000, guid: 47ffb3b2aaee8644d931ccdb29d92550, type: 3}
   spriteWithoutArms: {fileID: 21300000, guid: bda668f27e204074a8fc65de7d2b9a1d, type: 3}
   pickable: 1
+  screenShakeAmnt: 0
+  screenShakeDur: 0
 --- !u!114 &7658332134839728198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,6 +135,18 @@ CircleCollider2D:
   m_Offset: {x: 0.02230072, y: 0}
   serializedVersion: 2
   m_Radius: 1.124855
+--- !u!114 &2345888200324579484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481358426653487480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc97a660fe1e64648b8ee1a1da37ec6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6497057828448153267
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,6 @@ public class Rocket : MonoBehaviour, Damager {
         foreach (Collider2D hitCollider in hitColliders) {
             if(hitCollider.CompareTag("Enemy")) Destroy(hitCollider.gameObject);
         }
-
         Instantiate(explosionEffect, transform.position, explosionEffect.transform.rotation);
         Destroy(gameObject);
     }

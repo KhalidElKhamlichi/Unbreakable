@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class WaveManager : MonoBehaviour {
     [SerializeField] private Transform spawnLocations;
     [SerializeField] private GameObject grunt;
+    [SerializeField] private GameObject grunt2;
     [SerializeField] private int initialNbrOfGruntsPerWave;
     [SerializeField] private float gruntsMultiplierPerWave = 1;
     [SerializeField] private float spawnIntervalMin;
@@ -27,7 +28,7 @@ public class WaveManager : MonoBehaviour {
         gameManager = GetComponent<GameManager>();
         currentNbrOfGruntsPerWave = initialNbrOfGruntsPerWave;
         betweenWavesTimer = timeBetweenWaves;
-        currentWave = new EnemyWave(grunt, currentNbrOfGruntsPerWave, spawnIntervalMin, spawnIntervalMax);
+        currentWave = new EnemyWave(grunt, grunt2, currentNbrOfGruntsPerWave, spawnIntervalMin, spawnIntervalMax);
     }
 
 
@@ -35,8 +36,8 @@ public class WaveManager : MonoBehaviour {
         if (!currentWave.isDone()) {
             spawnTimer -= Time.deltaTime;
             if (spawnTimer <= 0) {
-                Transform spawnLocation = pickSpawnLocation();
-                GameObject enemy = Instantiate(currentWave.getEnemy(), spawnLocation);
+                Vector3 spawnLocation = pickSpawnLocation();
+                GameObject enemy = Instantiate(currentWave.getEnemy(), spawnLocation, Quaternion.identity);
                 spawnedEnemyCounter++;
                 enemy.GetComponent	<Lifecycle>().onDeath(reduceEnemyCounter);
                 gameManager.subscribeToEnemyDeath(enemy);
@@ -61,11 +62,12 @@ public class WaveManager : MonoBehaviour {
         betweenWavesTimer = timeBetweenWaves;
         currentNbrOfGruntsPerWave = (int) (currentNbrOfGruntsPerWave * gruntsMultiplierPerWave);
         spawnIntervalMax -= spawnIntervalMaxReductionPerWave;
-        currentWave = new EnemyWave(grunt, currentNbrOfGruntsPerWave, spawnIntervalMin, spawnIntervalMax);
+        spawnIntervalMax = Math.Max(spawnIntervalMin, spawnIntervalMax);
+        currentWave = new EnemyWave(grunt, grunt2, currentNbrOfGruntsPerWave, spawnIntervalMin, spawnIntervalMax);
     }
     
-    private Transform pickSpawnLocation() {
+    private Vector3 pickSpawnLocation() {
         int index = Random.Range(0, spawnLocations.childCount);
-        return spawnLocations.GetChild(index);
+        return spawnLocations.GetChild(index).position;
     }
 }

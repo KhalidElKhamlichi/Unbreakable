@@ -1,31 +1,21 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 
-public class Claymore : MonoBehaviour, Weapon
+public class Claymore : Weapon
 {
-    
     [SerializeField] private int radius;
     [SerializeField] private GameObject explosionEffect;
-    [SerializeField] private Sprite spriteWithArms;
-    [SerializeField] private Sprite spriteWithoutArms;
     [SerializeField] private GameObject fieldOfEffect;
-
-    private SpriteRenderer spriteRenderer;
-    private bool pickable = true;
+    
     private bool isActive;
-
-    private void Start() {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
+    
     private void OnTriggerEnter2D(Collider2D other) {
         if (!isActive || !other.CompareTag("Enemy")) return;
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, radius+radius/4);
+        float damaginRadius = radius+radius*.8f;
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, damaginRadius);
         foreach (Collider2D hitCollider in hitColliders) {
             if(hitCollider.CompareTag("Enemy")) Destroy(hitCollider.gameObject);
         }
-
         Instantiate(explosionEffect, transform.position, explosionEffect.transform.rotation);
         Destroy(gameObject);
     }
@@ -34,7 +24,7 @@ public class Claymore : MonoBehaviour, Weapon
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere (transform.position, radius);
     }
-    public void attack() {
+    public override void attack() {
         isActive = true;
         pickable = false;
         GetComponent<CircleCollider2D>().radius = radius;
@@ -45,21 +35,8 @@ public class Claymore : MonoBehaviour, Weapon
         
     }
 
-    public bool isPickable() {
-        return pickable;
-    }
-
-    public void setPickable(bool pickable) {
-        this.pickable = pickable;
-        if(!pickable) isActive = true;
-    }
-
-    public void pickUp() {
-        spriteRenderer.sprite = spriteWithArms;
-    }
-
-    public void drop() {
-        spriteRenderer.sprite = spriteWithoutArms;
+    public override void drop() {
+        base.drop();
         Instantiate(fieldOfEffect, transform.position, Quaternion.identity).transform.parent = transform;
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1409546042224642400}
   - component: {fileID: 7253629782911396671}
   - component: {fileID: 2122579836}
+  - component: {fileID: 8780096048206755297}
   m_Layer: 8
   m_Name: Claymore
   m_TagString: Untagged
@@ -102,6 +103,8 @@ MonoBehaviour:
   spriteWithArms: {fileID: 21300000, guid: 568fe067c1b72c94f934d0014d08cc6b, type: 3}
   spriteWithoutArms: {fileID: 21300000, guid: b3cc612c7663cf142bbe3e1d87298c70, type: 3}
   fieldOfEffect: {fileID: 8078034867764505068, guid: 8d8fe6caaaf2a524fbbbf799bf3465ff, type: 3}
+  screenShakeAmnt: 0.12
+  screenShakeDur: 0.05
 --- !u!58 &2122579836
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -118,6 +121,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.53
+--- !u!114 &8780096048206755297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787050577222344598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc97a660fe1e64648b8ee1a1da37ec6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2057944750168180178
 GameObject:
   m_ObjectHideFlags: 0
