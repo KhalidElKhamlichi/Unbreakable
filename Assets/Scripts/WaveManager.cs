@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-
 public class WaveManager : MonoBehaviour {
     [SerializeField] private Transform spawnLocations;
     [SerializeField] private GameObject grunt;
