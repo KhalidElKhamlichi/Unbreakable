@@ -1,5 +1,6 @@
 ﻿using System;
 using DG.Tweening;
+using Unbreakable;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -121,21 +122,17 @@ public class PlayerManager : MonoBehaviour
         this.interactable = interactable;
     }
     
-    private void reactToHit(Collider2D collider2D) {
+    private void reactToHit(HitInfo hit) {
         if(isKnockedback) return;
         isKnockedback = true;
-//        controller.knockback();
-			
-        StartCoroutine(collisionManager.disableCollisionWith(collider2D.tag, invincibilityAfterHurtTime));
+        StartCoroutine(collisionManager.disableCollisionWith(hit.getTag(), invincibilityAfterHurtTime));
 			
         Invoke(nameof(unsetIsKnockedback), invincibilityAfterHurtTime/4);
 			
-        float? knockbackForce = collider2D.gameObject.GetComponent<Damager>()?.getKnockbackForce();
+        float? knockbackForce = hit.getDamager()?.getKnockbackForce();
         if (!knockbackForce.HasValue) return;
-        Vector2 collisionDirection =  transform.position - collider2D.transform.position;
-        collisionDirection.Normalize();
-        Vector2 knockbackVelocity = collisionDirection * new Vector2(knockbackForce.Value, Mathf.Abs(knockbackForce.Value/2));
-//        velocity = knockbackVelocity;
+
+        Vector2 knockbackVelocity = hit.getCollisionDirection().normalized * new Vector2(knockbackForce.Value, Mathf.Abs(knockbackForce.Value/2));
         controller.knockback(knockbackVelocity, invincibilityAfterHurtTime/4);
 
 //        StartCoroutine(vibrateGamepad(.3f));

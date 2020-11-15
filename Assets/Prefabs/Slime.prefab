@@ -17,8 +17,10 @@ GameObject:
   - component: {fileID: 3859279129062604199}
   - component: {fileID: -6310066816293662122}
   - component: {fileID: 1723096653}
+  - component: {fileID: -5871417232039787313}
+  - component: {fileID: -3737851276535510798}
   m_Layer: 10
-  m_Name: Grunt
+  m_Name: Slime
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,3 +215,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 100
+--- !u!114 &-5871417232039787313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111635827149175836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c52960457f34524d992088261853cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitFX: {fileID: 5096626588765331563, guid: a7963d33ba0e80842896f9d604c4fe4a, type: 3}
+  deathFX: {fileID: 1452759747293112, guid: f68c395797f7b8f4eaa3c3ee9c18fb56, type: 3}
+--- !u!114 &-3737851276535510798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111635827149175836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa077607a615164d9dc40ba465f3b49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeTime: 0.02

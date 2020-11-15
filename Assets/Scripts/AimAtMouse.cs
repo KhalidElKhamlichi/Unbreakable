@@ -54,7 +54,7 @@ public class AimAtMouse : MonoBehaviour {
         }
         
     }
-
+    
     public Vector3 getLookDirection() {
         return lookDir;
     }

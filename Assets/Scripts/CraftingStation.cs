@@ -14,7 +14,6 @@ public class CraftingStation : MonoBehaviour, Interactable {
     [SerializeField] private string textPrompt;
     [SerializeField] private GameObject craftingProgressUI;
     [SerializeField] private GameObject interactionUI;
-    [SerializeField] private GameManager gameManager;
 
     private bool isCrafting;
     private Image craftingProgressBar;
@@ -54,12 +53,10 @@ public class CraftingStation : MonoBehaviour, Interactable {
     
     private IEnumerator craft()
     {
-        print("crafting initiated");
         InvokeRepeating(nameof(updateCraftingProgressBar), 0.0f, 0.1f);
         
         yield return new WaitForSeconds(delay);
         
-        print("crafting done");
         isCrafting = false;
         craftingProgressUI.SetActive(false);
         craftingProgressBar.fillAmount = 0.0f;
@@ -69,17 +66,13 @@ public class CraftingStation : MonoBehaviour, Interactable {
 
     private void spawnWeapon() {
         int randomIndex = Random.Range(0, weapons.Count);
-        print("spawning weapon: "+randomIndex);
         GameObject weapon = Instantiate(weapons[randomIndex], transform.position, Quaternion.identity);
         weapon.GetComponent<Collider2D>().enabled = false;
         weapon.transform.DOJump(transform.position - transform.up * 1.5f, 1, 1, .1f, false).onComplete += () => weapon.GetComponent<Collider2D>().enabled = true;;
     }
-
-
-
+    
     private void updateCraftingProgressBar() {
         craftingProgressBar.fillAmount += 1/ (delay	/ .1f);
-//        craftingProgressBar.fillAmount += 0.027f/delay+delay/150;
     }
 
 }

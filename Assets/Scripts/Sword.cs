@@ -5,6 +5,7 @@ public class Sword : Weapon, Damager
     [SerializeField] private int damage;
     
     public override void attack() {
+        base.attack();
         GetComponent<Collider2D>().enabled = true;
         Destroy(gameObject, .5f);
     }

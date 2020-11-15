@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Damager
   - vCam
+  - Enemy Projectile
   layers:
   - Default
   - TransparentFX

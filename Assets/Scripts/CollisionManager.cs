@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections;
+using Unbreakable;
 using UnityEngine;
 
 public class CollisionManager : MonoBehaviour {
     [SerializeField] string hitTriggerTag;
-    private event Action<Collider2D> hitEvent;
+    private event Action<HitInfo> hitEvent;
     private string ignoreTag = string.Empty;
 
     private void OnTriggerEnter2D(Collider2D other) {
-        invokeHitEvent(other);
+        invokeHitEvent(new HitInfo(other.GetComponent<Damager>(), other.tag, transform.position - other.transform.position));
     }
         
     private void OnTriggerStay2D(Collider2D other) {
-        invokeHitEvent(other);
+        invokeHitEvent(new HitInfo(other.GetComponent<Damager>(), other.tag, transform.position - other.transform.position));
     }
 
-    private void invokeHitEvent(Collider2D other) {
-        if (other.tag.Equals(hitTriggerTag) && !ignoreTag.Equals(other.tag)) {
-            hitEvent?.Invoke(other);
+    public void invokeHitEvent(HitInfo hitInfo) {
+        if (hitInfo.getTag().Contains(hitTriggerTag) && !ignoreTag.Contains(hitInfo.getTag())) {
+            hitEvent?.Invoke(hitInfo);
         }
     }
         
@@ -29,6 +30,6 @@ public class CollisionManager : MonoBehaviour {
         ignoreTag = string.Empty;
     }
 
-    public void onHit(Action<Collider2D> onHit) => hitEvent += onHit;
+    public void onHit(Action<HitInfo> onHit) => hitEvent += onHit;
             
 }

@@ -1,17 +1,25 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Rocket : MonoBehaviour, Damager {
     
-    [SerializeField] private int radius;
+    [SerializeField] private float radius;
+    [SerializeField] private int damage;
     [SerializeField] private GameObject explosionEffect;
+    [SerializeField] private float shakeAmount;
+    [SerializeField] private float shakeDuration;
+
+    private ScreenShake screenShake;
+    private BasicExplosion explosion;
+
+    private void Start() {
+        screenShake = FindObjectOfType<ScreenShake>();
+        explosion = new BasicExplosion(gameObject, radius);
+    }
+
     private void OnTriggerEnter2D(Collider2D other) {
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, radius);
-        foreach (Collider2D hitCollider in hitColliders) {
-            if(hitCollider.CompareTag("Enemy")) Destroy(hitCollider.gameObject);
-        }
+        explosion.start();
+        screenShake.shake(shakeAmount, shakeDuration);
         Instantiate(explosionEffect, transform.position, explosionEffect.transform.rotation);
         Destroy(gameObject);
     }
@@ -22,7 +30,7 @@ public class Rocket : MonoBehaviour, Damager {
     }
 
     public int getDamage() {
-        throw new NotImplementedException();
+        return damage;
     }
 
     public float getKnockbackForce() {

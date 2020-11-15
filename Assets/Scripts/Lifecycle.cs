@@ -1,4 +1,5 @@
 ﻿using System;
+using Unbreakable;
 using UnityEngine;
 
 [RequireComponent(typeof(CollisionManager))]
@@ -17,8 +18,8 @@ public class Lifecycle : MonoBehaviour {
         deathEvent += onDeath;
     }
 
-    protected virtual void takeDamage(Collider2D other) {
-        Damager damager = other.gameObject.GetComponent<Damager>();
+    protected virtual void takeDamage(HitInfo hit) {
+        Damager damager = hit.getDamager();
         if (damager == null) return;
         
         currentHP -= damager.getDamage();

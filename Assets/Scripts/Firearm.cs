@@ -7,7 +7,6 @@ public class Firearm : Weapon {
 
     private Transform emissionPoint;
     private FiringStrategy firingStrategy;
-    private event Action onAttackEvent;
 
     protected override void Start() {
         base.Start();
@@ -16,10 +15,8 @@ public class Firearm : Weapon {
     }
 
     public override void attack() {
+        base.attack();
         firingStrategy.shoot(projectile, emissionPoint);
-        onAttackEvent?.Invoke();
         Destroy(gameObject);
     }
-
-    public void onAttack(Action action) => onAttackEvent += action;
 }

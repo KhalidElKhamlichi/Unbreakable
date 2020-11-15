@@ -10,8 +10,7 @@ public class CameraFollow : MonoBehaviour
     private GameObject target;
     private CinemachineVirtualCamera camera;
 
-    private void Start()
-    {
+    private void OnEnable() {
         camera = GetComponent<CinemachineVirtualCamera>();
         target = new GameObject();
         camera.Follow = target.transform;
