@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 517ad3f6ddcf6f343ae3751decb901bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 500
   weaponGameObject: {fileID: 6403872486959499815}
   weaponWrapper: {fileID: 7642863093868372620}
   swordWrapper: {fileID: 1070172255}
@@ -412,6 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashTime: 0.2
   numberOfFlashes: 5
+  flashColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &6805221513907419999
 PrefabInstance:
   m_ObjectHideFlags: 0

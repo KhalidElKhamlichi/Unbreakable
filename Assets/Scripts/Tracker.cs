@@ -1,63 +1,65 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Pathfinding;
 using UnityEngine;
 
-[RequireComponent(typeof(CollisionManager))]
+[RequireComponent(typeof(Seeker))]
 public class Tracker : MonoBehaviour, Damager {
 	
-//    [SerializeField] private GameObject hitEffect;
-    [SerializeField] private LayerMask collisionMask;
-    [SerializeField] private float searchRadius;
     [SerializeField] private float speed;
+    [SerializeField] private float nextWaypointDistance = 3.0f;
     [SerializeField] private int damage;
     [SerializeField] private float knockbackForce;
+    [SerializeField] private bool isFlipped;
 	
     private Transform target;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rbody;
-    private bool isTargetDetected = true;
+    private Seeker seeker;
+    private Path path;
+    private int currentWaypoint;
+    private bool isTracking = true;
 
     void Start () {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rbody = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-//        GetComponent<CollisionManager>().onHit(reactToHit);
+        seeker = GetComponent<Seeker>();
+        InvokeRepeating(nameof(updatePath), 0f, .1f);
     }
-
-    private void Update() {
-//        Collider2D collider = Physics2D.OverlapCircle(transform.position, searchRadius, collisionMask); 
-//        setIsTargetDetected(true);
+    
+    private void updatePath() {
+        path = seeker.StartPath(transform.position, target.position, onPathComplete);
     }
 
     void FixedUpdate () {
-        if (isTargetDetected) {
-//            if (knockback.isFrozen()) return;
-
-            Vector2 force = target.position - transform.position;
-            force.Normalize();
-            rbody.velocity = force * speed;
-            lookAtTarget();
+        if (!isTracking) return;
+        if(path == null || currentWaypoint >= path.vectorPath.Count) return;
+        
+        setVelocity();
+        lookAtTarget();
+        
+        float distance = Vector2.Distance(rbody.position, path.vectorPath[currentWaypoint]);
+        if (distance < nextWaypointDistance) {
+            currentWaypoint++;
         }
     }
 
-    public void setIsTargetDetected(bool isTargetDetected) {
-        this.isTargetDetected = isTargetDetected;
+    private void setVelocity() {
+        Vector2 currentWaypointPosition = path.vectorPath[currentWaypoint];
+        Vector2 direction = (currentWaypointPosition - rbody.position).normalized;
+        rbody.velocity =  Time.fixedDeltaTime * speed * direction;
     }
 
-//    private void reactToHit(Collider2D collider2D) {
-//        IDamager damager = collider2D.gameObject.GetComponent<IDamager>();
-//        if (damager == null) return;
-//        float knockbackForce = damager.getKnockbackForce();
-//        knockback.knockback(new Vector2(knockbackForce, knockbackForce));
-//        Quaternion colliderRotation = collider2D.transform.rotation;
-//        Quaternion hitEffectRot = Quaternion.Euler(colliderRotation.eulerAngles.x, colliderRotation.eulerAngles.y + 180, colliderRotation.eulerAngles.z);
-//        GameObject hitEffectClone = Instantiate(hitEffect, collider2D.ClosestPoint(transform.position), hitEffectRot);
-//        Destroy(hitEffectClone, 0.13f);
-//    }
+    private void onPathComplete(Path p) {
+        if (p.error) return;
+        path = p;
+        currentWaypoint = 0;
+    }
 
     private void lookAtTarget() {
-        spriteRenderer.flipX = !(transform.InverseTransformPoint(target.position).x > 0.1);
+        bool flipX;
+        flipX = transform.InverseTransformPoint(target.position).x > 0.1;
+        flipX = isFlipped ? !flipX : flipX;
+        spriteRenderer.flipX = flipX;
     }
 
     public int getDamage() {
@@ -67,9 +69,11 @@ public class Tracker : MonoBehaviour, Damager {
     public float getKnockbackForce() {
         return knockbackForce;
     }
-    
-//    private void OnDrawGizmos() {
-//        Gizmos.color = Color.red;
-//        Gizmos.DrawWireSphere(transform.position, searchRadius);
-//    }
+
+    public void start() {
+        isTracking = true;
+    }
+    public void stop() {
+        isTracking = false;
+    }
 }

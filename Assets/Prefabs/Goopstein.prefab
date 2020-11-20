@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: -2676107740964551474}
   - component: {fileID: 7803097784995080069}
   - component: {fileID: -2027045349140711380}
+  - component: {fileID: 1816528309}
+  - component: {fileID: 1816528310}
   m_Layer: 10
   m_Name: Goopstein
   m_TagString: Enemy
@@ -82,7 +84,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 89e68aeb97d6e894e967ace493214351, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.9375, y: 1.125}
@@ -208,15 +210,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 520138b46340eb049849b3f868acd067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 256
   searchRadius: 10
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4352
   projectile: {fileID: 1037148256250830665, guid: 7a3a16b168b719c4680685f75c08d386, type: 3}
-  speed: 3
   damage: 10
   firerate: 1
-  projSpeed: 30000
+  projSpeed: 500
   knockbackForce: 4
 --- !u!114 &7803097784995080069
 MonoBehaviour:
@@ -245,3 +246,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freezeTime: 0.02
+--- !u!114 &1816528309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111635827149175836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
+--- !u!114 &1816528310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111635827149175836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 888e4d747c785ff42a89cebeb80b4374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 150
+  nextWaypointDistance: 3
+  damage: 10
+  knockbackForce: 4

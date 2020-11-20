@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 1723096653}
   - component: {fileID: -5871417232039787313}
   - component: {fileID: -3737851276535510798}
+  - component: {fileID: 1511655076}
   m_Layer: 10
   m_Name: Slime
   m_TagString: Enemy
@@ -182,7 +183,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &-6310066816293662122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,13 +196,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 888e4d747c785ff42a89cebeb80b4374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 256
-  searchRadius: 3
-  speed: 3
+  speed: 150
+  nextWaypointDistance: 3
   damage: 10
   knockbackForce: 4
+  isFlipped: 1
 --- !u!114 &1723096653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,3 +241,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freezeTime: 0.02
+--- !u!114 &1511655076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111635827149175836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1

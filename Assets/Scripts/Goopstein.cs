@@ -2,112 +2,82 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CollisionManager))]
+[RequireComponent(typeof(Tracker))]
 public class Goopstein : MonoBehaviour, Damager {
 	
-//    [SerializeField] private GameObject hitEffect;
-    [SerializeField] private LayerMask collisionMask;
     [SerializeField] private float searchRadius;
+    [SerializeField] private LayerMask layerMask;
     [SerializeField] private GameObject projectile;
-    [SerializeField] private float speed;
     [SerializeField] private int damage;
     [SerializeField] private float firerate;
-    [SerializeField] private float projSpeed = 500.0f;
+    [SerializeField] private float projSpeed;
     [SerializeField] private float knockbackForce;
 	
     private Transform target;
-    private SpriteRenderer spriteRenderer;
+    private Tracker tracker;
     private Rigidbody2D rbody;
-    private bool isTargetDetected = false;
+    private bool isTargetDetected;
     private Animator animator;
     private float timer;
     private Vector2 direction;
     private bool isShooting;
+    private static readonly int Attack = Animator.StringToHash("Attack");
 
     void Start () {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         rbody = GetComponent<Rigidbody2D>();
+        tracker = GetComponent<Tracker>();
         animator = GetComponent<Animator>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-//        timer = 1 / firerate;
-//        GetComponent<CollisionManager>().onHit(reactToHit);
     }
 
     private void Update() {
         timer -= Time.deltaTime;
-//        if (collider.CompareTag("Player")) {
-//            animator.SetTrigger("Attack");
-//            setIsTargetDetected(true);
-//        }
-//        else {
-//            setIsTargetDetected(false);
-//        }
         bool playerFound = false;
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, searchRadius);
-        foreach (Collider2D hitCollider in hitColliders) {
-            if (hitCollider.CompareTag("Player")) {
-                playerFound = true;
-            }
-           
+
+        RaycastHit2D hit = Physics2D.Raycast(rbody.position, direction, searchRadius, layerMask);
+        if (hit) {
+            Debug.DrawLine(rbody.position, hit.point, Color.green);
+            playerFound = hit.collider.CompareTag("Player");
         }
-        setIsTargetDetected(playerFound);
+        else {
+            Debug.DrawLine(rbody.position, rbody.position + direction * searchRadius, Color.red);
+        }
         
+        setIsTargetDetected(playerFound);
     }
 
     void FixedUpdate () {
-        Vector2 force = target.position - transform.position;
-        direction = force;
-        force.Normalize();
-        lookAtTarget();
+        direction = (target.position - transform.position).normalized;
         if (isTargetDetected || isShooting) {
+            tracker.stop();
             rbody.velocity = Vector2.zero;
             if (timer <= 0) {
-                shoot(force);
+                shoot();
                 timer = 1 / firerate;
             }
         }
         else {
-            rbody.velocity = force * speed;
+            tracker.start();
         }
-
     }
 
-    private void shoot(Vector2 force) {
-        animator.SetTrigger("Attack");
+    private void shoot() {
+        animator.SetTrigger(Attack);
         isShooting = true;
         Invoke(nameof(instantiateProj), .5f);
     }
 
     private void instantiateProj() {
         GameObject projClone = Instantiate(projectile, transform.position, projectile.transform.rotation);
-//        projClone.transform.LookAt(target);
-//        float rot_z = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-//        projClone.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
 
-        Rigidbody2D projRbdy = projClone.GetComponent<Rigidbody2D>();
+        Rigidbody2D projectileRbody = projClone.GetComponent<Rigidbody2D>();
 
-        projRbdy.AddForce(Time.deltaTime * projSpeed * direction.normalized);
-        //rbody.SetRotation(Quaternion.LookRotation(rbody.velocity));
+        projectileRbody.AddForce(direction * (projSpeed * Time.deltaTime), ForceMode2D.Impulse);
         isShooting = false;
     }
 
-    public void setIsTargetDetected(bool isTargetDetected) {
+    private void setIsTargetDetected(bool isTargetDetected) {
         this.isTargetDetected = isTargetDetected;
-    }
-
-//    private void reactToHit(Collider2D collider2D) {
-//        IDamager damager = collider2D.gameObject.GetComponent<IDamager>();
-//        if (damager == null) return;
-//        float knockbackForce = damager.getKnockbackForce();
-//        knockback.knockback(new Vector2(knockbackForce, knockbackForce));
-//        Quaternion colliderRotation = collider2D.transform.rotation;
-//        Quaternion hitEffectRot = Quaternion.Euler(colliderRotation.eulerAngles.x, colliderRotation.eulerAngles.y + 180, colliderRotation.eulerAngles.z);
-//        GameObject hitEffectClone = Instantiate(hitEffect, collider2D.ClosestPoint(transform.position), hitEffectRot);
-//        Destroy(hitEffectClone, 0.13f);
-//    }
-
-    private void lookAtTarget() {
-        spriteRenderer.flipX = (transform.InverseTransformPoint(target.position).x > 0.1);
     }
 
     public int getDamage() {
@@ -119,8 +89,9 @@ public class Goopstein : MonoBehaviour, Damager {
     }
     
     private void OnDrawGizmos() {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, searchRadius);
+//        Gizmos.color = Color.red;
+//        Vector2 forward = transform.TransformDirection(direction) * searchRadius;
+//        Gizmos.DrawLine(transform.position, forward);
     }
 }
 
