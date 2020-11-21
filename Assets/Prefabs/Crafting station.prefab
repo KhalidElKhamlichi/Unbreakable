@@ -101,12 +101,11 @@ MonoBehaviour:
   - {fileID: 481358426653487480, guid: 2c8a14f1c5972b743a33d2b83839a2c9, type: 3}
   - {fileID: 481358426653487480, guid: a5f670571cf87ca46a8b8ea9990bc151, type: 3}
   - {fileID: 1787050577222344598, guid: 99edabb5a4589ff43b0d0226c50f40d0, type: 3}
-  delay: 2
+  timeToCraft: 10
   cost: 200
   textPrompt: 'Press E to Craft (Cost: 200)'
   craftingProgressUI: {fileID: 6699401670305487737}
   interactionUI: {fileID: 0}
-  gameManager: {fileID: 0}
 --- !u!58 &1649458682
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 
 public class CraftingStation : MonoBehaviour, Interactable {
     [SerializeField] private List<GameObject> weapons;
-    [SerializeField] private float delay;
+    [SerializeField] private float timeToCraft;
     [SerializeField] private int cost;
     [SerializeField] private string textPrompt;
     [SerializeField] private GameObject craftingProgressUI;
@@ -55,7 +55,7 @@ public class CraftingStation : MonoBehaviour, Interactable {
     {
         InvokeRepeating(nameof(updateCraftingProgressBar), 0.0f, 0.1f);
         
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(timeToCraft);
         
         isCrafting = false;
         craftingProgressUI.SetActive(false);
@@ -72,7 +72,7 @@ public class CraftingStation : MonoBehaviour, Interactable {
     }
     
     private void updateCraftingProgressBar() {
-        craftingProgressBar.fillAmount += 1/ (delay	/ .1f);
+        craftingProgressBar.fillAmount += 1/ (timeToCraft	/ .1f);
     }
 
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4856601752886022373}
   - component: {fileID: 590583839330631114}
   - component: {fileID: 187573296684209381}
+  - component: {fileID: 3081669566641750876}
   m_Layer: 0
   m_Name: Hit FX
   m_TagString: Untagged
@@ -146,3 +147,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3081669566641750876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5096626588765331563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b97aa0c7268eda64abab55c149e22c21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 2

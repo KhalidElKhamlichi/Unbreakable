@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Shotgun : MonoBehaviour, FiringStrategy
 {
@@ -22,7 +24,6 @@ public class Shotgun : MonoBehaviour, FiringStrategy
             spread += Random.Range(-projectileSpread, projectileSpread);
             instantiateProjectile(projectile, spread, emissionPoint);
         }
-		
     }
 
 

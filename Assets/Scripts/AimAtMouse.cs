@@ -47,7 +47,7 @@ public class AimAtMouse : MonoBehaviour {
         }
         else {
             spriteRenderer.flipY = weapon.transform.rotation.eulerAngles.z < 270 && weapon.transform.rotation.eulerAngles.z > 90;
-            float newEmissionY = spriteRenderer.flipY ? -.2f : .3f;
+            float newEmissionY = spriteRenderer.flipY ? 0.2f : -0.26f;
             float newWrapperX = spriteRenderer.flipY ? .48f : -.48f;
             emissionPoint.localPosition = new Vector3(emissionPoint.localPosition.x, newEmissionY);
             weaponWrapper.localPosition = new Vector2(newWrapperX, weaponWrapper.localPosition.y);

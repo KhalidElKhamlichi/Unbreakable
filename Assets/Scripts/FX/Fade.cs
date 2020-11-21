@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Fade : MonoBehaviour {
     [SerializeField] private float timeToFade;
+    [SerializeField] private float initialDelay;
     private Color initialColor;
     private Color targetColor;
     private float timer;
@@ -16,6 +17,8 @@ public class Fade : MonoBehaviour {
     }
 
     void Update() {
+        initialDelay -= Time.deltaTime;
+        if (initialDelay > 0) return;
         timer += Time.deltaTime;
         spriteRenderer.color = Color.Lerp(initialColor, targetColor, timer/timeToFade);
     }
