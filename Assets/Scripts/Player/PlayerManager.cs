@@ -96,8 +96,9 @@ public class PlayerManager : MonoBehaviour
     }
 
     public void attack() {
-        weapon?.attack();
-        if(weaponGameObject == null) unreferenceWeapon();
+        if (weapon == null) return;
+        weapon.attack();
+        if(!weapon.isUsable()) unreferenceWeapon();
     }
 
     private void unreferenceWeapon() {

@@ -30,12 +30,10 @@ public class FlashOnHit : MonoBehaviour
 
     private void startFlashing(HitInfo hit) {
         if (isFlashing) return;
-
         flash();
     }
 
     private void flash() {
-//        material.SetFloat(FlashAmount, 1.7f);
         material.SetColor(FlashColor, flashColor);
         Invoke(nameof(resetColor), flashTime);
         currentNumberOfFlashes--;
@@ -44,7 +42,6 @@ public class FlashOnHit : MonoBehaviour
     
 
     private void resetColor() {
-//        material.SetFloat(FlashAmount, 1f);
         material.SetColor(FlashColor, initialColor);
         if (currentNumberOfFlashes > 0)
             Invoke(nameof(flash), flashTime);

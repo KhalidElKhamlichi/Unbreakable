@@ -36,6 +36,7 @@ public class Claymore : Weapon, Damager
         base.attack();
         isActive = true;
         pickable = false;
+        usable = false;
         GetComponent<CircleCollider2D>().radius = triggerRadius;
         gameObject.transform.parent = null;
         spriteRenderer.sprite = spriteWithoutArms;

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 481358426653487481}
   - component: {fileID: 481358426653487483}
   - component: {fileID: 481358426653487482}
-  - component: {fileID: 7658332134839728198}
   - component: {fileID: -3947846658923832456}
   - component: {fileID: 6946378276061925047}
   m_Layer: 8
@@ -103,23 +102,9 @@ MonoBehaviour:
   spriteWithArms: {fileID: 21300000, guid: 47ffb3b2aaee8644d931ccdb29d92550, type: 3}
   spriteWithoutArms: {fileID: 21300000, guid: bda668f27e204074a8fc65de7d2b9a1d, type: 3}
   pickupFX: {fileID: 6479330439470788659, guid: f463ad714b42e064081ce100b6d27198, type: 3}
-  projectile: {fileID: 4178489613852671165, guid: 169b280d493c4fa4ea28d2c4124bea56, type: 3}
   firerate: 1
   clipSize: 3
---- !u!114 &7658332134839728198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 481358426653487480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df6a9bc90f014c7582a74d77c9f8a35a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileSpread: 0.2
-  projSpeed: 500
+  firingStrategy: {fileID: 11400000, guid: 509d354b1cdf48b4bbf28229e010e9f5, type: 2}
 --- !u!58 &-3947846658923832456
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -153,7 +138,6 @@ MonoBehaviour:
   attackFX: {fileID: 7126526156218425120, guid: 6e951a0849ac7c047a923185a955f81f, type: 3}
   breakFX: {fileID: 1708636795932020467, guid: 8e5ec0cecff36d9499a497dba46ab442, type: 3}
   projectileShell: {fileID: 8946343310612313194, guid: f80bd40b2697e1843b0860a59037a973, type: 3}
-  shellGround: {fileID: 2325322117606024975, guid: 18faff5d57504694fb569300afe13317, type: 3}
   shellSpread: 0.8
   shellSpeed: 5
   nbrOfshells: 1

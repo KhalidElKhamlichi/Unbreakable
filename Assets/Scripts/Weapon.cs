@@ -9,6 +9,7 @@ public abstract class Weapon :  MonoBehaviour {
     [SerializeField] protected GameObject pickupFX;
     
     protected SpriteRenderer spriteRenderer;
+    protected bool usable = true;
     protected event Action onAttackEvent;
     protected event Action onDestroyedEvent;
 
@@ -19,6 +20,10 @@ public abstract class Weapon :  MonoBehaviour {
 
     public virtual void attack() {
         onAttackEvent?.Invoke();
+    }
+
+    public bool isUsable() {
+        return usable;
     }
     public void setPickable(bool pickable) {
         this.pickable = pickable;

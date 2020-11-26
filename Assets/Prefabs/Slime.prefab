@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: -5871417232039787313}
   - component: {fileID: -3737851276535510798}
   - component: {fileID: 1511655076}
+  - component: {fileID: 4783008211954613286}
   m_Layer: 10
   m_Name: Slime
   m_TagString: Enemy
@@ -60,7 +61,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 0c715acc92fd98c4e8049778c43414dc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -143,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a49054f4ba4786c42b1f17fc56fc2e56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 10
+  maxHP: 20
 --- !u!95 &-3505034808078348162
 Animator:
   serializedVersion: 3
@@ -269,3 +270,18 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!114 &4783008211954613286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111635827149175836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff02a86ab1df7040bf055f990e0d6b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashTime: 0.15
+  numberOfFlashes: 1
+  flashColor: {r: 1, g: 1, b: 1, a: 0.95686275}
