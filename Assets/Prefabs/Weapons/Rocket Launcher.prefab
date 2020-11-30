@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 481358426653487482}
   - component: {fileID: -3947846658923832456}
   - component: {fileID: 6946378276061925047}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: Rocket Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5072341822813065245}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: Emission point
   m_TagString: Untagged
   m_Icon: {fileID: 0}

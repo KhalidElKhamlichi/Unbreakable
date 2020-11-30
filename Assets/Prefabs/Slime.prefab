@@ -15,12 +15,12 @@ GameObject:
   - component: {fileID: 1874846169153936457}
   - component: {fileID: -3505034808078348162}
   - component: {fileID: 3859279129062604199}
-  - component: {fileID: -6310066816293662122}
   - component: {fileID: 1723096653}
   - component: {fileID: -5871417232039787313}
   - component: {fileID: -3737851276535510798}
   - component: {fileID: 1511655076}
   - component: {fileID: 4783008211954613286}
+  - component: {fileID: 1356706103}
   m_Layer: 10
   m_Name: Slime
   m_TagString: Enemy
@@ -185,23 +185,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-6310066816293662122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1111635827149175836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 888e4d747c785ff42a89cebeb80b4374, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 150
-  nextWaypointDistance: 3
-  damage: 10
-  knockbackForce: 4
-  isFlipped: 1
 --- !u!114 &1723096653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,3 +268,25 @@ MonoBehaviour:
   flashTime: 0.15
   numberOfFlashes: 1
   flashColor: {r: 1, g: 1, b: 1, a: 0.95686275}
+--- !u!114 &1356706103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111635827149175836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520138b46340eb049849b3f868acd067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  searchRadius: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4352
+  damage: 10
+  knockbackForce: 3
+  freezeOnHitTime: 0.1
+  trackingBehaviourTemplate: {fileID: 11400000, guid: d2e5cd16f26be6e4a8f1b050b3e95282, type: 2}
+  attackingBehaviourTemplate: {fileID: 0}
+  isFlipped: 0

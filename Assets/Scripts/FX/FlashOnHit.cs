@@ -18,7 +18,7 @@ public class FlashOnHit : MonoBehaviour
     private bool isFlashing => material.GetColor(FlashColor).Equals(flashColor);
 
     private void OnValidate() {
-        if(!GetComponent<SpriteRenderer>().sharedMaterial.HasProperty(FlashColor)) throw new Exception("Gameobject material doesn't have FlashAmount property");
+        if(!GetComponent<SpriteRenderer>().sharedMaterial.HasProperty(FlashColor)) throw new Exception("renderer material doesn't have FlashAmount property");
     }
 
     void Start () {
@@ -38,8 +38,6 @@ public class FlashOnHit : MonoBehaviour
         Invoke(nameof(resetColor), flashTime);
         currentNumberOfFlashes--;
     }
-
-    
 
     private void resetColor() {
         material.SetColor(FlashColor, initialColor);
