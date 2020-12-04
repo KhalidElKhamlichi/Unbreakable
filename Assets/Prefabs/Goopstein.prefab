@@ -234,8 +234,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c52960457f34524d992088261853cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitFX: {fileID: 5096626588765331563, guid: a7963d33ba0e80842896f9d604c4fe4a, type: 3}
-  deathFX: {fileID: 1452759747293112, guid: f68c395797f7b8f4eaa3c3ee9c18fb56, type: 3}
+  hitFX:
+  - {fileID: 5096626588765331563, guid: a7963d33ba0e80842896f9d604c4fe4a, type: 3}
+  deathFX:
+  - {fileID: 1280141305896002, guid: 4bc898b0af8cb9a4fa59a9e5ad246150, type: 3}
+  - {fileID: 844219354863541269, guid: 37258ba3e88de534fa28adc3736b85ff, type: 3}
 --- !u!114 &-2027045349140711380
 MonoBehaviour:
   m_ObjectHideFlags: 0
