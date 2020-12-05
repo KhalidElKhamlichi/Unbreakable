@@ -7,19 +7,23 @@ public abstract class Weapon :  MonoBehaviour {
     [SerializeField] protected Sprite spriteWithArms;
     [SerializeField] protected Sprite spriteWithoutArms;
     [SerializeField] protected GameObject pickupFX;
+    [SerializeField] protected int initialUses = 1;
     
     protected SpriteRenderer spriteRenderer;
     protected bool usable = true;
-    protected event Action onAttackEvent;
-    protected event Action onDestroyedEvent;
+    protected int remainingUses;
+    protected event Action attackEvent;
+    protected event Action destroyedEvent;
 
     protected virtual void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = pickable ? spriteWithoutArms : spriteWithArms;
+        remainingUses = initialUses;
     }
 
     public virtual void attack() {
-        onAttackEvent?.Invoke();
+        remainingUses--;
+        attackEvent?.Invoke();
     }
 
     public bool isUsable() {
@@ -48,12 +52,18 @@ public abstract class Weapon :  MonoBehaviour {
     }
 
     private void OnDestroy() {
-        onDestroyedEvent?.Invoke();
+        destroyedEvent?.Invoke();
     }
 
-    public void onAttack(Action action) => onAttackEvent += action;
+    public void onAttack(Action action) => attackEvent += action;
     
-    public void onDestroyed(Action action) => onDestroyedEvent += action;
+    public void onDestroyed(Action action) => destroyedEvent += action;
     
+    public int getInitialUses() {
+        return initialUses;
+    }
     
+    public int getRemainingUses() {
+        return remainingUses;
+    }
 }

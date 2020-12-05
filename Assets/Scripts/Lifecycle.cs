@@ -7,6 +7,7 @@ public class Lifecycle : MonoBehaviour {
     [SerializeField] int maxHP;
     
     private event Action<GameObject> deathEvent;
+    private event Action<int> takeDamageEvent;
     private int currentHP;
 
     protected virtual void Start() {
@@ -17,12 +18,16 @@ public class Lifecycle : MonoBehaviour {
     public void onDeath(Action<GameObject> onDeath) {
         deathEvent += onDeath;
     }
+    
+    public void onTakeDamage(Action<int> onTakeDamage) {
+        takeDamageEvent += onTakeDamage;
+    }
 
     protected virtual void takeDamage(HitInfo hit) {
         Damager damager = hit.getDamager();
         if (damager == null) return;
-        
         currentHP -= damager.getDamage();
+        takeDamageEvent?.Invoke(currentHP);
         checkLife();
     }
 
@@ -36,10 +41,6 @@ public class Lifecycle : MonoBehaviour {
 
     protected virtual void onDeath() {
         Destroy(transform.parent != null ? transform.parent.gameObject : gameObject, .1f);
-    }
-
-    public float getCurrentHp() {
-        return currentHP;
     }
 
     public float getMaxHp() {

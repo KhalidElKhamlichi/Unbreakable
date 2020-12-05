@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,55 +11,56 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private float hpDecaySpeed;
     [SerializeField] private TextMeshProUGUI currencyText;
     [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI ammoText;
 
     private Lifecycle life;
-    private GameManager gameManager;
+    private PlayerManager playerManager;
 
     void Start () {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameManager.currencyAmountChangedEvent += updateCurrency;
         life = player.GetComponent<Lifecycle>();
-        gameManager = GetComponent<GameManager>();
+        playerManager = player.GetComponent<PlayerManager>();
+        playerManager.onAttack(updateAmmo);
+        playerManager.onWeaponPickedUp(updateAmmo);
+        playerManager.onWeaponPickedUp(() => playerManager.onAttack(updateAmmo));
+        updateAmmo();
+        life.onTakeDamage(updateHpBar);
     }
 
-    private void Update()
-    {
-        //TODO remove from update to event
-        updateHpBar(life.getCurrentHp(), life.getMaxHp());
-        updateCurrency();
+    private void updateHpBar(int currentHp) {
+        hpBar.fillAmount = currentHp / life.getMaxHp();
+        if (hpBarDecay.fillAmount <= hpBar.fillAmount)
+            hpBarDecay.fillAmount = hpBar.fillAmount;
+        else
+            StartCoroutine(decayHpBar());
     }
 
-    private void updateHpBar(float newHP, float maxHP)
-    {
-        hpBar.fillAmount = newHP / maxHP;
-        hpBarDecay.fillAmount = (hpBarDecay.fillAmount <= hpBar.fillAmount) ? hpBar.fillAmount : hpBarDecay.fillAmount - hpDecaySpeed;
+    private IEnumerator decayHpBar() {
+        yield return new WaitForSeconds(.3f);
+        while (hpBarDecay.fillAmount > hpBar.fillAmount) {
+            hpBarDecay.fillAmount -= hpDecaySpeed * Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
     }
     
-    private void updateCurrency() {
-        currencyText.text = GameManager.getCurrencyAmount().ToString();
+    private void updateCurrency(int newAmount) {
+        currencyText.text = newAmount.ToString();
     }
 
     public void	 updateWaveTimer(float timer) {
         displayTimer(timer);
-//        else timerText.text = string.Empty;
-
     }
 
     private void displayTimer(float timer) {
-        int seconds = Mathf.RoundToInt(timer % 60);
+        TimeSpan timeSpan = TimeSpan.FromSeconds(timer);
+        
+        timerText.text = timeSpan.ToString(@"mm\:ss");
+    }
 
-        string secondsText = seconds.ToString();
-        if (seconds < 10)
-            secondsText = "0" + secondsText;
-
-        int mins;
-        if (Mathf.RoundToInt(timer / 60) <= timer / 60)
-            mins = Mathf.RoundToInt(timer / 60);
-        else
-            mins = (Mathf.RoundToInt(timer / 60) - 1);
-        string minsText = mins.ToString();
-        if (mins < 10)
-            minsText = "0" + minsText;
-
-        timerText.text = minsText + ":" + secondsText;
+    private void updateAmmo() {
+        int? initialWeaponUses = playerManager.getInitialWeaponUses();
+        int? remainingWeaponUses = playerManager.getRemainingWeaponUses();
+        ammoText.text = remainingWeaponUses.HasValue && initialWeaponUses.HasValue ? remainingWeaponUses.Value+"/"+initialWeaponUses.Value : "0/0";
     }
 }

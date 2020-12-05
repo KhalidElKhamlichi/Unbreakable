@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Firearm : Weapon {
     [SerializeField] private float firerate;
-    [SerializeField] private int clipSize = 1;
     [SerializeField] private FiringStrategy firingStrategy;
 
     private Transform emissionPoint;
@@ -20,12 +19,11 @@ public class Firearm : Weapon {
     }
     public override void attack() {
         if (timer > 0) return;
-        base.attack();
         firingStrategy.shoot(emissionPoint);
-        clipSize--;
+        
         timer = 1 / firerate;
-
-        if (clipSize == 0) {
+        base.attack();
+        if (remainingUses == 0) {
             usable = false;
             Destroy(gameObject);
         }

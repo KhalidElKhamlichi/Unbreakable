@@ -24,6 +24,7 @@ public class PlayerManager : MonoBehaviour
     private bool isKnockedback;
     private bool isDashing;
     private SpriteRenderer spriteRenderer;
+    private event Action weaponPickedUpEvent;
     
     private static readonly int HorizontalVelocity = Animator.StringToHash("HorizontalVelocity");
     private static readonly int VerticalVelocity = Animator.StringToHash("VerticalVelocity");
@@ -68,6 +69,7 @@ public class PlayerManager : MonoBehaviour
             weaponGameObject.transform.parent = wrapper;
             weapon.pickUp();
             aimAtMouse.setWeapon(weaponGameObject);
+            weaponPickedUpEvent?.Invoke();
         }
     }
 
@@ -121,6 +123,18 @@ public class PlayerManager : MonoBehaviour
     }
     public void setInteractable(Interactable interactable) {
         this.interactable = interactable;
+    }
+    
+    public void onAttack(Action action) => weapon?.onAttack(action);
+    
+    public void onWeaponPickedUp(Action action) => weaponPickedUpEvent += action;
+
+    public int? getRemainingWeaponUses() {
+        return weapon?.getRemainingUses();
+    }
+    
+    public int? getInitialWeaponUses() {
+        return weapon?.getInitialUses();
     }
     
     private void reactToHit(HitInfo hit) {
