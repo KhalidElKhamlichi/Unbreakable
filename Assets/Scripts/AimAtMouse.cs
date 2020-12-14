@@ -18,7 +18,7 @@ public class AimAtMouse : MonoBehaviour {
         emissionPoint = weapon.transform.GetChild(0);
     }
 
-    void Update() {
+    void FixedUpdate() {
         float angle = getRotationAngle();
         weaponWrapper.transform.RotateAround(weaponWrapper.transform.position, Vector3.forward, angle - tempAngle);
         tempAngle = angle;

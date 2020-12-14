@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Slime Tracking Behaviour
   m_EditorClassIdentifier: 
   nextWaypointDistance: 3
-  speed: 180
+  speed: 240

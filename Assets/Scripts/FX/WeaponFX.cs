@@ -12,16 +12,18 @@ public class WeaponFX : MonoBehaviour
     [SerializeField] int nbrOfshells;
 
     private ScreenShake screenShake;
+    private Transform emissionPoint;
     void Start() {
         screenShake = FindObjectOfType<ScreenShake>();
         Weapon weapon = GetComponent<Weapon>();
+        emissionPoint = transform.GetChild(0);
         weapon?.onAttack(shake);
         weapon?.onAttack(playAttackFX);
         weapon?.onDestroyed(playBreakFX);
     }
 
     private void playAttackFX() {
-        Instantiate(attackFX);
+        Instantiate(attackFX, emissionPoint.position, emissionPoint.rotation);
 
         for (int i = 0; i < nbrOfshells; i++) {
             instantiateShell();

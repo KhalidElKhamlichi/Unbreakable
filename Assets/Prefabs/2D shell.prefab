@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 907f56da4caf55643adc4b4dc0030fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shellGround: {fileID: 2325322117606024975, guid: 18faff5d57504694fb569300afe13317, type: 3}
+  ground: {fileID: 2325322117606024975, guid: 18faff5d57504694fb569300afe13317, type: 3}
   groundSpawnDelay:
     min: 1
     max: 1.3

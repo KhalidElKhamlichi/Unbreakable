@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour, Damager {
 	
-    [SerializeField] private float searchRadius;
+    [SerializeField] [MinMaxSlider(0f, 20f)] private MinMax searchRadius;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private int damage;
     [SerializeField] private float knockbackForce;
@@ -22,16 +22,23 @@ public class EnemyAI : MonoBehaviour, Damager {
     private Vector2 direction;
     private bool playerFound;
     private Animator animator;
+    private Coroutine temporaryFreezeCoroutine;
     private EnemyBehavior trackingBehaviour;
     private EnemyBehavior attackingBehaviour;
 
     void Start () {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        
         target = GameObject.FindGameObjectWithTag("Player").transform;
         if(trackingBehaviourTemplate) trackingBehaviour = Instantiate(trackingBehaviourTemplate);
         if(attackingBehaviourTemplate) attackingBehaviour = Instantiate(attackingBehaviourTemplate);
         rbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+       
+        GetComponent<Lifecycle>().onDeath(o => {
+            if (temporaryFreezeCoroutine != null) StopCoroutine(temporaryFreezeCoroutine);
+            StartCoroutine(temporaryFreeze(5));
+        });
         GetComponent<CollisionManager>().onHit(freeze);
         trackingBehaviour?.initialize(this, target);
         attackingBehaviour?.initialize(this, target);
@@ -39,12 +46,14 @@ public class EnemyAI : MonoBehaviour, Damager {
 
     private void Update() {
         direction = (target.position - transform.position).normalized;
+        isPlayerInFov();
         lookAtTarget();
+        
     }
 
     private void FixedUpdate() {
         if (isFrozen) return;
-        isPlayerInFov();
+        
         if (playerFound) {
             attackingBehaviour?.update();
         }
@@ -57,24 +66,25 @@ public class EnemyAI : MonoBehaviour, Damager {
     private void isPlayerInFov() {
         
         Vector2 rbodyPosition = rbody.position;
-        RaycastHit2D hit = Physics2D.Raycast(rbodyPosition, direction, searchRadius, layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(rbodyPosition, direction, searchRadius.RandomValue, layerMask);
         
         playerFound = hit && hit.collider.CompareTag("Player");
         if(playerFound) 
             Debug.DrawLine(rbodyPosition, hit.point, Color.green);
         else 
-            Debug.DrawLine(rbodyPosition, rbodyPosition + direction * searchRadius, Color.red);
+            Debug.DrawLine(rbodyPosition, rbodyPosition + direction * searchRadius.Max, Color.red);
     }
     
     private void freeze(HitInfo obj) {
-        StartCoroutine(temporaryFreeze());
+        if (isFrozen) return;
+        temporaryFreezeCoroutine = StartCoroutine(temporaryFreeze(freezeOnHitTime));
     }
     
-    private IEnumerator temporaryFreeze() {
+    private IEnumerator temporaryFreeze(float time) {
         isFrozen = true;
         rbody.velocity = Vector2.zero;
         animator.speed = 0;
-        yield return new WaitForSeconds(freezeOnHitTime);
+        yield return new WaitForSeconds(time);
         animator.speed = 1;
         isFrozen = false;
     }

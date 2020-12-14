@@ -10,10 +10,11 @@ public class PlayerInput : MonoBehaviour
     }
 
     void Update() {
+        if(GameManager.isGamePaused) return;
         Vector2 directionalInput = new Vector2 (Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         playerManager.setDirectionalInput(directionalInput);
 
-        if (Input.GetButton("Fire1")) playerManager.attack();
+        if (Input.GetButton("Fire")) playerManager.attack();
         
         if (Input.GetButton("Drop")) playerManager.dropWeapon();
         

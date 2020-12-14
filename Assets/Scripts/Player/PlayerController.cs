@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour
     }
 
     public void move(Vector2 moveAmount) {
-//        rbody.MovePosition(rbody.position + moveAmount * Time.fixedDeltaTime);
-        rbody.velocity = moveAmount * Time.fixedDeltaTime;
+//        rbody.MovePosition(rbody.position + moveAmount * Time.deltaTime);
+        rbody.velocity = moveAmount * Time.deltaTime;
     }
 
     public void knockback(Vector2 knockbackVelocity, float duration) {

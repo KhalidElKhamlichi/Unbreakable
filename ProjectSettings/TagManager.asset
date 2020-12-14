@@ -8,6 +8,7 @@ TagManager:
   - Damager
   - vCam
   - Enemy Projectile
+  - Button
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Enemy Projectile
   - Obstacle
   - Ground
-  - Shells
+  - Droppable
   - Weapon
   - 
   - 

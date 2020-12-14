@@ -33,14 +33,16 @@ public class Lifecycle : MonoBehaviour {
 
     private void checkLife() {
         if (currentHP <= 0) {
-            deathEvent?.Invoke(gameObject);
-            deathEvent = null;
+            takeDamageEvent = null;
             onDeath();
         }
     }
 
     protected virtual void onDeath() {
-        Destroy(transform.parent != null ? transform.parent.gameObject : gameObject, .1f);
+        GetComponent<Collider2D>().enabled = false;
+        deathEvent?.Invoke(gameObject);
+        deathEvent = null;
+        Destroy(gameObject, .5f);
     }
 
     public float getMaxHp() {

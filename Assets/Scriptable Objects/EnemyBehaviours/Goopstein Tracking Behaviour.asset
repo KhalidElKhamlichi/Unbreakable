@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Goopstein Tracking Behaviour
   m_EditorClassIdentifier: 
   nextWaypointDistance: 3
-  speed: 140
+  speed: 200

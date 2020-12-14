@@ -37,7 +37,7 @@ public class TrackingBehaviour : EnemyBehavior
     private void setVelocity() {
         Vector2 currentWaypointPosition = path.vectorPath[currentWaypoint];
         Vector2 direction = (currentWaypointPosition - rbody.position).normalized;
-        rbody.velocity =  Time.fixedDeltaTime * speed * direction;
+        rbody.velocity =  Time.deltaTime * speed * direction;
     }
     
     private IEnumerator updatePath() {

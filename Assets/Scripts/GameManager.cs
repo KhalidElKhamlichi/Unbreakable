@@ -2,10 +2,21 @@
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
-    [SerializeField] private UIManager uiManager;
     
+    [SerializeField] private UIManager uiManager;
     private static int currentCurrency;
     public static event Action<int> currencyAmountChangedEvent;
+    public static bool isGamePaused;
+
+    private void Update() {
+        if (Input.GetButtonDown("Pause")) {
+            if(isGamePaused) return;
+            isGamePaused = true;
+            uiManager.displayPauseUI();
+            Time.timeScale = 0;
+        }
+        
+    }
 
     public void subscribeToEnemyDeath(GameObject enemy) {
         enemy.GetComponent<Lifecycle>().onDeath(addCurrency);
