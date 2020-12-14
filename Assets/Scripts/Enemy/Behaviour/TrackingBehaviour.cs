@@ -7,16 +7,18 @@ using UnityEngine;
 public class TrackingBehaviour : EnemyBehavior
 {
     [SerializeField] private float nextWaypointDistance = 3.0f;
-    [SerializeField] private float speed;
+    [SerializeField] [MinMaxSlider(0f, 300f)] private MinMax speedRange;
     
     private Seeker seeker;
     private Transform transform;
     private Path path;
     private int currentWaypoint;
     private Rigidbody2D rbody;
+    private float speed;
     
     public override void initialize(MonoBehaviour enemy, Transform target) {
         base.initialize(enemy, target);
+        speed = speedRange.RandomValue;
         seeker = enemy.GetComponent<Seeker>();
         rbody = enemy.GetComponent<Rigidbody2D>();
         transform = enemy.transform;
