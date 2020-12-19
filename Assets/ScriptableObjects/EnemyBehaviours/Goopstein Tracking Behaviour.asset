@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44346bdbab448b14089c1105d9a15185, type: 3}
-  m_Name: Slime Tracking Behaviour
+  m_Name: Goopstein Tracking Behaviour
   m_EditorClassIdentifier: 
   nextWaypointDistance: 3
-  speed: 240
+  speedRange:
+    min: 190
+    max: 210

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour, Damager {
 	
-    [SerializeField] [MinMaxSlider(0f, 20f)] private MinMax searchRadius;
+    [SerializeField] [MinMaxSlider(0f, 20f)] private MinMax attackRange;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private int damage;
     [SerializeField] private float knockbackForce;
@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour, Damager {
     private SpriteRenderer spriteRenderer;
     private bool isFrozen;
     private Vector2 direction;
-    private bool playerFound;
+    private bool playerInRange;
     private Animator animator;
     private Coroutine temporaryFreezeCoroutine;
     private EnemyBehavior trackingBehaviour;
@@ -46,15 +46,14 @@ public class EnemyAI : MonoBehaviour, Damager {
 
     private void Update() {
         direction = (target.position - transform.position).normalized;
-        isPlayerInFov();
+        checkPlayerInRange();
         lookAtTarget();
-        
     }
 
     private void FixedUpdate() {
         if (isFrozen) return;
         
-        if (playerFound) {
+        if (playerInRange) {
             attackingBehaviour?.update();
         }
         else {
@@ -63,16 +62,15 @@ public class EnemyAI : MonoBehaviour, Damager {
 
     }
 
-    private void isPlayerInFov() {
-        
+    private void checkPlayerInRange() {
         Vector2 rbodyPosition = rbody.position;
-        RaycastHit2D hit = Physics2D.Raycast(rbodyPosition, direction, searchRadius.RandomValue, layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(rbodyPosition, direction, attackRange.RandomValue, layerMask);
         
-        playerFound = hit && hit.collider.CompareTag("Player");
-        if(playerFound) 
+        playerInRange = hit && hit.collider.CompareTag("Player");
+        if(playerInRange) 
             Debug.DrawLine(rbodyPosition, hit.point, Color.green);
         else 
-            Debug.DrawLine(rbodyPosition, rbodyPosition + direction * searchRadius.Max, Color.red);
+            Debug.DrawLine(rbodyPosition, rbodyPosition + direction * attackRange.Max, Color.red);
     }
     
     private void freeze(HitInfo obj) {
