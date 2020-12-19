@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 5971299470909525414}
   - component: {fileID: 5971299470909525415}
   m_Layer: 0
-  m_Name: Pause Canvas
+  m_Name: Pause UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -735,10 +735,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resume
       objectReference: {fileID: 0}
-    - target: {fileID: 7270086383657749096, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7270086383657749097, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -823,62 +819,7 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7270086383657749098, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7270086383657749098, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: resume
-      objectReference: {fileID: 0}
-    - target: {fileID: 7270086383657749099, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7270086384592893682, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7270086384592893682, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7270086384592893682, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7270086384592893682, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7270086384592893682, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7270086384592893682, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
-      propertyPath: m_fontSize
-      value: 28
-      objectReference: {fileID: 0}
-    - target: {fileID: 7270086384592893682, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 28
-      objectReference: {fileID: 0}
-    - target: {fileID: 7270086384592893682, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
-      propertyPath: m_text
-      value: Resume
-      objectReference: {fileID: 0}
-    - target: {fileID: 7270086384592893682, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4281876805
-      objectReference: {fileID: 0}
-    - target: {fileID: 7270086384592893682, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
-      propertyPath: m_fontColor.a
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7270086383657749101, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
-    - {fileID: 7270086383657749102, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
-    - {fileID: -9176505363917310030, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdc749663f5492e419e4f604a4459c48, type: 3}
 --- !u!224 &472604759509715782 stripped
 RectTransform:

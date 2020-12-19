@@ -84,14 +84,12 @@ public class UIManager : MonoBehaviour {
     // Used by onClick button event
     public void exit() {
         resume();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Scenes/SplashScreen");
     }
     
     // Used by onClick button event
     public void resume() {
         GameManager.isGamePaused = false;
-        // Unselect resume button to keep regular on hover color
-//        EventSystem.current.SetSelectedGameObject(null);
         pauseUIAnimator.SetTrigger(FADE_OUT);
         Time.timeScale = 1;
     }
