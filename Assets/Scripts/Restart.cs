@@ -6,9 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Restart : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         GetComponent<Lifecycle>().onDeath(restart);
     }
 
@@ -16,9 +14,4 @@ public class Restart : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -33,16 +33,17 @@ public class PlayerManager : MonoBehaviour
     private static readonly int Moving = Animator.StringToHash("Moving");
     private static readonly int HasWeapon = Animator.StringToHash("HasWeapon");
 
-    private void OnEnable() {
+    private void Awake() {
         aimAtMouse = GetComponent<AimAtMouse>();
         aimAtMouse.setWeapon(weaponGameObject);
+        weapon = weaponGameObject.GetComponent<Weapon>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Start() {
         controller = GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
-        weapon = weaponGameObject.GetComponent<Weapon>();
+        
         collisionManager = GetComponent<CollisionManager>();
         collisionManager.onHit(reactToHit);
     }

@@ -52,7 +52,7 @@ public abstract class Weapon :  MonoBehaviour {
     }
 
     private void OnDestroy() {
-        destroyedEvent?.Invoke();
+        if(remainingUses <= 0) destroyedEvent?.Invoke();
     }
 
     public void onAttack(Action action) => attackEvent += action;

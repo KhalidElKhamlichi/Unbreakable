@@ -26,6 +26,11 @@ public class WaveManager : MonoBehaviour {
     private int spawnedEnemyCounter;
     private bool isInTransition;
 
+    private void Awake() {
+        waveIndex = 1;
+//        waveEndedEvent = null;
+    }
+
     private void Start() {
         gameManager = GetComponent<GameManager>();
         currentNbrOfGruntsPerWave = initialNbrOfGruntsPerWave;

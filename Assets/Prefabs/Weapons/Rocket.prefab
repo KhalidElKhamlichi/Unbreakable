@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c848f74c78655a34fad3ecc3829780c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
+  radius: 5
   damage: 100
   explosionEffect: {fileID: 5436445204578143464, guid: ed4bdf62c3a7b5b4a974155266604af1, type: 3}
   shakeAmount: 2

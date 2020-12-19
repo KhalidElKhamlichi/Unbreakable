@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class WeaponFX : MonoBehaviour
 {
@@ -24,7 +26,6 @@ public class WeaponFX : MonoBehaviour
 
     private void playAttackFX() {
         Instantiate(attackFX, emissionPoint.position, emissionPoint.rotation);
-
         for (int i = 0; i < nbrOfshells; i++) {
             instantiateShell();
         }
@@ -33,7 +34,6 @@ public class WeaponFX : MonoBehaviour
 
     private void instantiateShell() {
         GameObject shellClone = Instantiate(projectileShell, transform.position, transform.rotation);
-//        Instantiate(shellGround, transform.parent.position + Vector3.down * Random.Range(3f, 5f), Quaternion.identity);
         Rigidbody2D shellRigidbody = shellClone.GetComponent<Rigidbody2D>();
         shellRigidbody.AddForce(new Vector2(Random.Range(-shellSpread, shellSpread), shellSpread) * shellSpeed, ForceMode2D.Impulse);
     }

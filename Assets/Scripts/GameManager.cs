@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour {
     public static event Action<int> currencyAmountChangedEvent;
     public static bool isGamePaused;
 
+    private void Awake() {
+        currentCurrency = 0;
+    }
+
     private void Update() {
         if (Input.GetButtonDown("Pause")) {
             if(isGamePaused) return;

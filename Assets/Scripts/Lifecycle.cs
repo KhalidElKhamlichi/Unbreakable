@@ -49,7 +49,4 @@ public class Lifecycle : MonoBehaviour {
         return maxHP;
     }
 
-    private void OnDestroy() {
-        deathEvent?.Invoke(gameObject);
-    }
 }
