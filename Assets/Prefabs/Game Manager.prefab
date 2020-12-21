@@ -59,10 +59,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnLocations: {fileID: 0}
-  grunt: {fileID: 1111635827149175836, guid: 8dc09b7e8c295f746835113d44b909dd, type: 3}
-  grunt2: {fileID: 1111635827149175836, guid: 46210675a6e63f748968ebcfc70c1224, type: 3}
-  initialNbrOfGruntsPerWave: 0
-  gruntsMultiplierPerWave: 1.2
+  enemyPrefabs:
+  - {fileID: 1111635827149175836, guid: 46210675a6e63f748968ebcfc70c1224, type: 3}
+  - {fileID: 1111635827149175836, guid: 8dc09b7e8c295f746835113d44b909dd, type: 3}
+  initialNbrOfEnemiesPerWave: 15
+  enemiesMultiplierPerWave: 1.2
   spawnIntervalMin: 0.5
   spawnIntervalMax: 5
   spawnIntervalMaxReductionPerWave: 0.5

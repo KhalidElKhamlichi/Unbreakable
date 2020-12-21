@@ -8,10 +8,9 @@ public class WaveManager : MonoBehaviour {
     public static event Action waveEndedEvent;
     public static int waveIndex = 1;
     [SerializeField] private Transform spawnLocations;
-    [SerializeField] private GameObject grunt;
-    [SerializeField] private GameObject grunt2;
-    [SerializeField] private int initialNbrOfGruntsPerWave;
-    [SerializeField] private float gruntsMultiplierPerWave = 1;
+    [SerializeField] private List<GameObject> enemyPrefabs;
+    [SerializeField] private int initialNbrOfEnemiesPerWave;
+    [SerializeField] private float enemiesMultiplierPerWave = 1;
     [SerializeField] private float spawnIntervalMin;
     [SerializeField] private float spawnIntervalMax;
     [SerializeField] private float spawnIntervalMaxReductionPerWave = 0;
@@ -20,7 +19,7 @@ public class WaveManager : MonoBehaviour {
     
     private List<EnemyWave> waves;
     private EnemyWave currentWave;
-    private int currentNbrOfGruntsPerWave;
+    private int currentNbrOfEnemiesPerWave;
     private GameManager gameManager;
     private float spawnTimer;
     private int spawnedEnemyCounter;
@@ -28,13 +27,12 @@ public class WaveManager : MonoBehaviour {
 
     private void Awake() {
         waveIndex = 1;
-//        waveEndedEvent = null;
     }
 
     private void Start() {
         gameManager = GetComponent<GameManager>();
-        currentNbrOfGruntsPerWave = initialNbrOfGruntsPerWave;
-        currentWave = new EnemyWave(grunt, grunt2, currentNbrOfGruntsPerWave, spawnIntervalMin, spawnIntervalMax);
+        currentNbrOfEnemiesPerWave = initialNbrOfEnemiesPerWave;
+        currentWave = new EnemyWave(enemyPrefabs, currentNbrOfEnemiesPerWave, spawnIntervalMin, spawnIntervalMax);
     }
 
 
@@ -71,10 +69,10 @@ public class WaveManager : MonoBehaviour {
 
     private void initializeNextWave() {
         spawnTimer = 0;
-        currentNbrOfGruntsPerWave = (int) (currentNbrOfGruntsPerWave * gruntsMultiplierPerWave);
+        currentNbrOfEnemiesPerWave = (int) Math.Round(currentNbrOfEnemiesPerWave * enemiesMultiplierPerWave, 0);
         spawnIntervalMax -= spawnIntervalMaxReductionPerWave;
         spawnIntervalMax = Math.Max(spawnIntervalMin, spawnIntervalMax);
-        currentWave = new EnemyWave(grunt, grunt2, currentNbrOfGruntsPerWave, spawnIntervalMin, spawnIntervalMax);
+        currentWave = new EnemyWave(enemyPrefabs, currentNbrOfEnemiesPerWave, spawnIntervalMin, spawnIntervalMax);
         waveIndex++;
     }
     
