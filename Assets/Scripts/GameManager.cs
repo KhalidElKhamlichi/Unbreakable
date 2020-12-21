@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour {
 
     private void Awake() {
         currentCurrency = 0;
+        WaveManager.waveEndedEvent += saveScore;
+    }
+
+    private void saveScore() {
+        PlayerPrefs.SetInt("LastClearedWaveIndex", Mathf.Max(PlayerPrefs.GetInt("LastClearedWaveIndex"), WaveManager.waveIndex));
     }
 
     private void Update() {

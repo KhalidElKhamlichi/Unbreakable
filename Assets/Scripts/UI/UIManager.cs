@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,8 @@ public class UIManager : MonoBehaviour {
 	
     private static readonly int FADE_IN = Animator.StringToHash("FadeIn");
     private static readonly int FADE_OUT = Animator.StringToHash("FadeOut");
+    private static readonly int DISPLAY_CONTROLS = Animator.StringToHash("DisplayControls");
+    private static readonly int DISPLAY_MENU = Animator.StringToHash("DisplayMenu");
     [SerializeField] private Image hpBar;
     [SerializeField] private Image hpBarDecay;
     [SerializeField] private float hpDecaySpeed;
@@ -96,6 +99,14 @@ public class UIManager : MonoBehaviour {
     
     public void displayPauseUI() {
         pauseUIAnimator.SetTrigger(FADE_IN);
-        pauseUIWaveIndex.text = "Wave: "+WaveManager.waveIndex;
+        pauseUIWaveIndex.text = "Current wave: "+WaveManager.waveIndex + "\n" + "Last cleared wave: " + PlayerPrefs.GetInt("LastClearedWaveIndex");
+    }
+
+    public void displayControls() {
+        pauseUIAnimator.SetTrigger(DISPLAY_CONTROLS);
+    }
+    
+    public void displayMenu() {
+        pauseUIAnimator.SetTrigger(DISPLAY_MENU);
     }
 }
