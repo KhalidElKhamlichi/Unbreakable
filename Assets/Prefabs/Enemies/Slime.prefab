@@ -296,9 +296,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitFX:
   - {fileID: 5096626588765331563, guid: a7963d33ba0e80842896f9d604c4fe4a, type: 3}
-  deathFX:
-  - {fileID: 1280141305896002, guid: 4bc898b0af8cb9a4fa59a9e5ad246150, type: 3}
+  deathVFX:
   - {fileID: 844219354863541269, guid: 37258ba3e88de534fa28adc3736b85ff, type: 3}
+  - {fileID: 1280141305896002, guid: 4bc898b0af8cb9a4fa59a9e5ad246150, type: 3}
+  deathSFX: {fileID: 2125867242790696173, guid: fb995a5d80fcb7d4fa5d0150842d679e, type: 3}
   deathGameObject: {fileID: 3430755506919704749, guid: 6f48f806ab3a16b4c90c53ee7db99241, type: 3}
 --- !u!114 &-3737851276535510798
 MonoBehaviour:

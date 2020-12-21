@@ -7,7 +7,8 @@ using UnityEngine;
 public class CharacterFX : MonoBehaviour {
 
     [SerializeField] private List<GameObject> hitFX;
-    [SerializeField] private List<GameObject> deathFX;
+    [SerializeField] private List<GameObject> deathVFX;
+    [SerializeField] private GameObject deathSFX;
     [SerializeField] private GameObject deathGameObject;
 
     private void Start() {
@@ -19,11 +20,12 @@ public class CharacterFX : MonoBehaviour {
     private void spawnDeathFX(GameObject obj) {
         Fade fade = GetComponent<Fade>();
         if(fade) fade.enabled = true;
-        if(deathFX.Count > 0) Invoke(nameof(instantiateDeathFX), .1f);
+        if(deathVFX.Count > 0) Invoke(nameof(instantiateDeathFX), .1f);
     }
     [ContextMenu("instantiateDeathFX")]
     private void instantiateDeathFX() {
-        Instantiate(pickRandom(deathFX), transform.position, Quaternion.identity);
+        Instantiate(pickRandom(deathVFX), transform.position, Quaternion.identity);
+        Instantiate(deathSFX, transform.position, Quaternion.identity);
     }
 
     private void spawnDeathObject(GameObject obj) {
