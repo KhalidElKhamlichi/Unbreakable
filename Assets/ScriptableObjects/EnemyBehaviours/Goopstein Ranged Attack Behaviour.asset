@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 1037148256250830665, guid: 7a3a16b168b719c4680685f75c08d386, type: 3}
   firerate: 1
-  projSpeed: 1400
+  projSpeed: 800
