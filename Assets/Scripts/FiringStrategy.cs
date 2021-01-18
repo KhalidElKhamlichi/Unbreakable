@@ -1,40 +1,41 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
-[CreateAssetMenu]
-public class FiringStrategy : ScriptableObject {
+namespace Unbreakable {
+    [CreateAssetMenu]
+    public class FiringStrategy : ScriptableObject {
     
-    [SerializeField] private GameObject projectile;
-    [SerializeField] private float projectileSpread = 0.2f;
-    [SerializeField] private float projSpeed = 500.0f;
-    [SerializeField] private int nbrOfProjectiles;
-    [SerializeField] private float spreadAngle;
+        [SerializeField] private GameObject projectile;
+        [SerializeField] private float projectileSpread = 0.2f;
+        [SerializeField] private float projSpeed = 500.0f;
+        [SerializeField] private int nbrOfProjectiles;
+        [SerializeField] private float spreadAngle;
 
-    public void shoot(Transform emissionPoint) {
-        float spread = 0;
-        for (int i = 0; i < nbrOfProjectiles; i++) {
-            // Increment for every other extra projectile
-            if (i % 2 != 0) {
-                spread += Mathf.Sign(spread) * spreadAngle;
+        public void shoot(Transform emissionPoint) {
+            float spread = 0;
+            for (int i = 0; i < nbrOfProjectiles; i++) {
+                // Increment for every other extra projectile
+                if (i % 2 != 0) {
+                    spread += Mathf.Sign(spread) * spreadAngle;
+                }
+
+                // permute between each side
+                spread *= -1;
+                spread += Random.Range(-projectileSpread, projectileSpread);
+                instantiateProjectile(projectile, spread, emissionPoint);
             }
-
-            // permute between each side
-            spread *= -1;
-            spread += Random.Range(-projectileSpread, projectileSpread);
-            instantiateProjectile(projectile, spread, emissionPoint);
         }
-    }
 
-    private void instantiateProjectile(GameObject projectile, float spread, Transform emissionPoint) {
-        // rotate weapon
-        emissionPoint.Rotate(0, 0, spread);
+        private void instantiateProjectile(GameObject projectile, float spread, Transform emissionPoint) {
+            // rotate weapon
+            emissionPoint.Rotate(0, 0, spread);
             
-        GameObject projectileClone = Instantiate(projectile, emissionPoint.position, emissionPoint.rotation);
-        Rigidbody2D rbody = projectileClone.GetComponent<Rigidbody2D>();
-        rbody.AddForce(emissionPoint.transform.right * projSpeed);
+            GameObject projectileClone = Instantiate(projectile, emissionPoint.position, emissionPoint.rotation);
+            Rigidbody2D rbody = projectileClone.GetComponent<Rigidbody2D>();
+            rbody.AddForce(emissionPoint.transform.right * projSpeed);
             
-        // reset rotation
-        emissionPoint.Rotate(0, 0, -spread);
+            // reset rotation
+            emissionPoint.Rotate(0, 0, -spread);
+        }
     }
 }

@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SelfDestruct : MonoBehaviour
-{
-    [SerializeField] private float lifetime;
+namespace Unbreakable {
+    public class SelfDestruct : MonoBehaviour
+    {
+        [SerializeField] private float lifetime;
 
-    private void Start() {
-        Destroy(gameObject, lifetime);
+        private void Start() {
+            Destroy(gameObject, lifetime);
+        }
     }
 }

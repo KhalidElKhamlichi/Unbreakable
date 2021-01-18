@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 
-public class DestroyOnImpact : MonoBehaviour {
+namespace Unbreakable {
+    public class DestroyOnImpact : MonoBehaviour {
 
-    [SerializeField] private GameObject impactEffect;
+        [SerializeField] private GameObject impactEffect;
 		
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(impactEffect) Instantiate(impactEffect, other.ClosestPoint(transform.position), transform.rotation);
-        Destroy(gameObject);
+        private void OnTriggerEnter2D(Collider2D other) {
+            if(impactEffect) Instantiate(impactEffect, other.ClosestPoint(transform.position), transform.rotation);
+            Destroy(gameObject);
+        }
     }
 }

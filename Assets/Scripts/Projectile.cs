@@ -1,16 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Projectile : MonoBehaviour, Damager {
-    [SerializeField] private int damage;
-    [SerializeField] private float knockbackForce;
+namespace Unbreakable {
+    public class Projectile : MonoBehaviour, Damager {
+        [SerializeField] private int damage;
+        [SerializeField] private float knockbackForce;
 
-    public int getDamage() {
-        return damage;
-    }
+        public int getDamage() {
+            return damage;
+        }
 
-    public float getKnockbackForce() {
-        return knockbackForce;
+        public float getKnockbackForce() {
+            return knockbackForce;
+        }
     }
 }
