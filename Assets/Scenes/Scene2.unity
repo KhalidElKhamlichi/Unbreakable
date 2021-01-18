@@ -29962,6 +29962,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 800581455, guid: 517c082a8c9e8804eb5b866f89744bf0, type: 3}
+      propertyPath: m_text
+      value: 'Move: WASD
+
+
+        Shoot: LMB
+
+
+        Drop weapon: C
+
+
+        Interact:
+        E'
+      objectReference: {fileID: 0}
     - target: {fileID: 472604759509715781, guid: 517c082a8c9e8804eb5b866f89744bf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
