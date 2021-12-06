@@ -1085,3 +1085,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionText: {fileID: 7656604209906889119}
+  delayBeforeTransition: 0.4

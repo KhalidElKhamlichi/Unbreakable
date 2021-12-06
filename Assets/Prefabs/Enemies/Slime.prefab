@@ -281,6 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee78b518a3125248ab71bf642ad0d11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currencyAmount: {fileID: 11400000, guid: d4f8d25c482442049af23b6a47bca865, type: 2}
   amount: 100
 --- !u!114 &-5871417232039787313
 MonoBehaviour:
@@ -300,7 +301,7 @@ MonoBehaviour:
   - {fileID: 844219354863541269, guid: 37258ba3e88de534fa28adc3736b85ff, type: 3}
   - {fileID: 1280141305896002, guid: 4bc898b0af8cb9a4fa59a9e5ad246150, type: 3}
   deathSFX: {fileID: 2125867242790696173, guid: fb995a5d80fcb7d4fa5d0150842d679e, type: 3}
-  deathGameObject: {fileID: 3430755506919704749, guid: 6f48f806ab3a16b4c90c53ee7db99241, type: 3}
+  postDeathObject: {fileID: 3430755506919704749, guid: 6f48f806ab3a16b4c90c53ee7db99241, type: 3}
 --- !u!114 &-3737851276535510798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,7 +373,7 @@ MonoBehaviour:
   attackRange:
     min: 0
     max: 0
-  layerMask:
+  targetLookupLayerMask:
     serializedVersion: 2
     m_Bits: 4352
   damage: 10

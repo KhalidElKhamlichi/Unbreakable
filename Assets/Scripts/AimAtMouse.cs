@@ -6,20 +6,20 @@ namespace Unbreakable {
     
         [SerializeField] private Transform weaponWrapper;
         [SerializeField] private Transform swordWrapper;
+        
         private GameObject weapon;
         private float tempAngle;
         private SpriteRenderer spriteRenderer;
-        private UnityEngine.Camera camera;
+        private UnityEngine.Camera cameraInstance;
         private Transform emissionPoint;
         private Quaternion lastWeaponRotation;
         private Vector3 lookDir;
-        private void Start() {
-            spriteRenderer = weapon.GetComponent<SpriteRenderer>();
-            camera = UnityEngine.Camera.main;
-            emissionPoint = weapon.transform.GetChild(0);
+
+        private void Awake() {
+            cameraInstance = UnityEngine.Camera.main;
         }
 
-        void FixedUpdate() {
+        private void FixedUpdate() {
             float angle = getRotationAngle();
             weaponWrapper.transform.RotateAround(weaponWrapper.transform.position, Vector3.forward, angle - tempAngle);
             tempAngle = angle;
@@ -33,10 +33,12 @@ namespace Unbreakable {
             emissionPoint = weapon.transform.GetChild(0);
         }
 
+        public Vector3 getLookDirection() {
+            return lookDir;
+        }
         private float getRotationAngle() {
-            lookDir = Input.mousePosition - camera.WorldToScreenPoint(weaponWrapper.transform.position);
-            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
-            return angle;
+            lookDir = Input.mousePosition - cameraInstance.WorldToScreenPoint(weaponWrapper.transform.position);
+            return Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         }
 
         private void adjustWeaponSpriteDirection() {
@@ -53,11 +55,7 @@ namespace Unbreakable {
                 emissionPoint.localPosition = new Vector3(emissionPoint.localPosition.x, newEmissionY);
                 weaponWrapper.localPosition = new Vector2(newWrapperX, weaponWrapper.localPosition.y);
             }
-        
         }
     
-        public Vector3 getLookDirection() {
-            return lookDir;
-        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
@@ -9,27 +10,26 @@ using Random = UnityEngine.Random;
 
 namespace Unbreakable {
     public class CraftingStation : MonoBehaviour, Interactable {
+        
+        [SerializeField] private FloatVariable currencyAmount;
         [SerializeField] private List<GameObject> weapons;
         [SerializeField] private float timeToCraft;
         [SerializeField] private int cost;
         [SerializeField] private string textPrompt;
         [SerializeField] private GameObject craftingProgressUI;
+        [SerializeField] private Image craftingProgressBar;
         [SerializeField] private GameObject interactionUI;
 
         private bool isCrafting;
-        private Image craftingProgressBar;
 
-        private void Start() {
-            craftingProgressBar = craftingProgressUI.transform.GetChild(0).GetComponent<Image>();
+        private void Awake() {
+            interactionUI.GetComponentInChildren<TextMeshProUGUI>().text = textPrompt;
         }
 
         private void OnTriggerEnter2D(Collider2D other) {
-            if (other.CompareTag("Player")) {
-                if(!isCrafting) {
-                    interactionUI.GetComponentInChildren<TextMeshProUGUI>().text = textPrompt;
-                    interactionUI.SetActive(true);
-                    other.GetComponent<PlayerManager>().setInteractable(this);
-                }
+            if (other.CompareTag("Player") && !isCrafting) {
+                interactionUI.SetActive(true);
+                other.GetComponent<PlayerManager>().setInteractable(this);
             }
         }
     
@@ -45,15 +45,14 @@ namespace Unbreakable {
         }
 
         public void interact() {
-            if(isCrafting || GameManager.getCurrencyAmount() < cost) return;
+            if(isCrafting || currencyAmount.value < cost) return;
             isCrafting = true;
             craftingProgressUI.SetActive(true);
-            GameManager.reduceCurrency(cost);
+            currencyAmount.changeValue(currencyAmount.value-cost);
             StartCoroutine(craft());
         }
     
-        private IEnumerator craft()
-        {
+        private IEnumerator craft() {
             InvokeRepeating(nameof(updateCraftingProgressBar), 0.0f, 0.1f);
         
             yield return new WaitForSeconds(timeToCraft);

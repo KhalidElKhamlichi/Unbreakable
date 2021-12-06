@@ -9,9 +9,9 @@ namespace Unbreakable.FX {
         [SerializeField] private List<GameObject> hitFX;
         [SerializeField] private List<GameObject> deathVFX;
         [SerializeField] private GameObject deathSFX;
-        [SerializeField] private GameObject deathGameObject;
+        [SerializeField] private GameObject postDeathObject;
 
-        private void Start() {
+        private void Awake() {
             GetComponent<Lifecycle>().onDeath(spawnDeathFX);
             GetComponent<CollisionManager>().onHit(spawnHitFX);
             GetComponent<Lifecycle>().onDeath(spawnDeathObject);
@@ -33,18 +33,19 @@ namespace Unbreakable.FX {
         }
     
         private void instantiateDeathObject() {
-            GameObject deathGameObjectClone = Instantiate(deathGameObject, transform.position, transform.rotation);
+            GameObject deathGameObjectClone = Instantiate(postDeathObject, transform.position, transform.rotation);
             Rigidbody2D deathGameObjectRigidbody = deathGameObjectClone.GetComponent<Rigidbody2D>();
             deathGameObjectRigidbody.AddForce(new Vector2(Random.Range(-.3f, .3f), 1.5f) * 3, ForceMode2D.Impulse);
         }
     
+        private void spawnHitFX(HitInfo hit) {
+            if(hitFX.Count > 0) Instantiate(pickRandom(hitFX), transform.position, Quaternion.identity);
+        }
+        
         private GameObject pickRandom(List<GameObject> gameObjects) {
             int randomIndex = Random.Range(0, gameObjects.Count);
             return gameObjects[randomIndex];
         }
 
-        private void spawnHitFX(HitInfo hit) {
-            if(hitFX.Count > 0) Instantiate(pickRandom(hitFX), transform.position, Quaternion.identity);
-        }
     }
 }

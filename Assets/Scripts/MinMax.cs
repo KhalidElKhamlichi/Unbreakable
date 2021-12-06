@@ -1,92 +1,62 @@
 ﻿using System;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Unbreakable {
-#endif
 
     [Serializable]
-    public struct MinMax
-    {
+    public struct MinMax {
 
         [SerializeField]
         private float min;
         [SerializeField]
         private float max;
 
-        public float Min
-        {
-            get
-            {
-                return this.min;
-            }
-            set
-            {
-                this.min = value;
-            }
+        public float Min {
+            get => min;
+            set => min = value;
         }
 
-        public float Max
-        {
-            get
-            {
-                return this.max;
-            }
-            set
-            {
-                this.max = value;
-            }
+        public float Max {
+            get => max;
+            set => max = value;
         }
 
-        public float RandomValue
-        {
-            get
-            {
-                return UnityEngine.Random.Range(this.min, this.max);
-            }
-        }
+        public float RandomValue => UnityEngine.Random.Range(min, max);
 
-        public MinMax(float min, float max)
-        {
+        public MinMax(float min, float max) {
             this.min = min;
             this.max = max;
         }
-
-        public float Clamp(float value)
-        {
-            return Mathf.Clamp(value, this.min, this.max);
+        
+        public float Clamp(float value) {
+            return Mathf.Clamp(value, min, max);
         }
-
     }
 
-    public class MinMaxSliderAttribute : PropertyAttribute
-    {
-
+    public class MinMaxSliderAttribute : PropertyAttribute {
         public readonly float Min;
         public readonly float Max;
 
-        public MinMaxSliderAttribute(float min, float max)
-        {
+        public MinMaxSliderAttribute(float min, float max) {
             Min = min;
             Max = max;
         }
-
     }
 
 #if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(MinMax))]
     [CustomPropertyDrawer(typeof(MinMaxSliderAttribute))]
-    public class MinMaxDrawer : PropertyDrawer
-    {
+    public class MinMaxDrawer : PropertyDrawer {
 
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
             if (property.serializedObject.isEditingMultipleObjects) return 0f;
             return base.GetPropertyHeight(property, label) + 16f;
         }
 
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-        {
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
             if (property.serializedObject.isEditingMultipleObjects) return;
 
             var minProperty = property.FindPropertyRelative("min");

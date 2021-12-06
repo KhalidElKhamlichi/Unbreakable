@@ -8,17 +8,16 @@ namespace Unbreakable.FX {
         [SerializeField] private float shakeDuration;
         [SerializeField] private GameObject attackFX;
         [SerializeField] private GameObject breakFX;
-        [SerializeField] GameObject projectileShell;
-        [SerializeField] float shellSpread = 0.6f;
-        [SerializeField] float shellSpeed = 250.0f;
-        [SerializeField] int nbrOfshells;
+        [SerializeField] private GameObject projectileShell;
+        [SerializeField] private float shellSpread = 0.6f;
+        [SerializeField] private float shellSpeed = 250.0f;
+        [SerializeField] private int nbrOfShells;
+        [SerializeField] private Transform emissionPoint;
 
         private ScreenShake screenShake;
-        private Transform emissionPoint;
-        void Start() {
+        private void Awake() {
             screenShake = FindObjectOfType<ScreenShake>();
             Weapon weapon = GetComponent<Weapon>();
-            emissionPoint = transform.GetChild(0);
             weapon?.onAttack(shake);
             weapon?.onAttack(playAttackFX);
             weapon?.onDestroyed(playBreakFX);
@@ -26,10 +25,9 @@ namespace Unbreakable.FX {
 
         private void playAttackFX() {
             Instantiate(attackFX, emissionPoint.position, emissionPoint.rotation);
-            for (int i = 0; i < nbrOfshells; i++) {
+            for (int i = 0; i < nbrOfShells; i++) {
                 instantiateShell();
             }
-
         }
 
         private void instantiateShell() {

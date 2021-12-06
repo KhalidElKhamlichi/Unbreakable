@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2e7cf9b485aa344b72fb04743107f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currencyAmount: {fileID: 11400000, guid: d4f8d25c482442049af23b6a47bca865, type: 2}
   weapons:
   - {fileID: 481358426653487480, guid: 2c8a14f1c5972b743a33d2b83839a2c9, type: 3}
   - {fileID: 481358426653487480, guid: a5f670571cf87ca46a8b8ea9990bc151, type: 3}
@@ -105,6 +106,7 @@ MonoBehaviour:
   cost: 200
   textPrompt: 'Press E to Craft (Cost: 200)'
   craftingProgressUI: {fileID: 6699401670305487737}
+  craftingProgressBar: {fileID: 6699401669452891975}
   interactionUI: {fileID: 0}
 --- !u!58 &1649458682
 CircleCollider2D:
@@ -289,3 +291,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7290579539122392114, guid: 1eb360c8c740872429eb6f48923b4789, type: 3}
   m_PrefabInstance: {fileID: 4167053567622420299}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6699401669452891975 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7290579538269868044, guid: 1eb360c8c740872429eb6f48923b4789, type: 3}
+  m_PrefabInstance: {fileID: 4167053567622420299}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

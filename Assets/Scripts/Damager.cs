@@ -1,7 +1,6 @@
 ﻿namespace Unbreakable {
-    public interface Damager 
-    {
+    public interface Damager {
         int getDamage();
-        float getKnockbackForce();
+        float getKnockBackForce();
     }
 }

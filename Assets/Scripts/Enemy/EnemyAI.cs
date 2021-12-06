@@ -6,12 +6,12 @@ namespace Unbreakable.Enemy {
     public class EnemyAI : MonoBehaviour, Damager {
 	
         [SerializeField] [MinMaxSlider(0f, 20f)] private MinMax attackRange;
-        [SerializeField] private LayerMask layerMask;
+        [SerializeField] private LayerMask targetLookupLayerMask;
         [SerializeField] private int damage;
         [SerializeField] private float knockbackForce;
         [SerializeField] private float freezeOnHitTime;
-        [SerializeField] private EnemyBehavior trackingBehaviourTemplate;
-        [SerializeField] private EnemyBehavior attackingBehaviourTemplate;
+        [SerializeField] private EnemyBehaviour trackingBehaviourTemplate;
+        [SerializeField] private EnemyBehaviour attackingBehaviourTemplate;
         [SerializeField] private bool isFlipped;
 	
         private Transform target;
@@ -22,25 +22,26 @@ namespace Unbreakable.Enemy {
         private bool playerInRange;
         private Animator animator;
         private Coroutine temporaryFreezeCoroutine;
-        private EnemyBehavior trackingBehaviour;
-        private EnemyBehavior attackingBehaviour;
+        private EnemyBehaviour trackingBehaviour;
+        private EnemyBehaviour attackingBehaviour;
 
-        void Start () {
+        void Awake () {
             spriteRenderer = GetComponent<SpriteRenderer>();
-        
-            target = GameObject.FindGameObjectWithTag("Player").transform;
-            if(trackingBehaviourTemplate) trackingBehaviour = Instantiate(trackingBehaviourTemplate);
-            if(attackingBehaviourTemplate) attackingBehaviour = Instantiate(attackingBehaviourTemplate);
             rbody = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
+            target = GameObject.FindGameObjectWithTag("Player").transform;
+            
+            if(trackingBehaviourTemplate) trackingBehaviour = Instantiate(trackingBehaviourTemplate);
+            if(attackingBehaviourTemplate) attackingBehaviour = Instantiate(attackingBehaviourTemplate);
+            trackingBehaviour?.initialize(this, target);
+            attackingBehaviour?.initialize(this, target);
+            
        
             GetComponent<Lifecycle>().onDeath(o => {
                 if (temporaryFreezeCoroutine != null) StopCoroutine(temporaryFreezeCoroutine);
                 StartCoroutine(temporaryFreeze(5));
             });
             GetComponent<CollisionManager>().onHit(freeze);
-            trackingBehaviour?.initialize(this, target);
-            attackingBehaviour?.initialize(this, target);
         }
 
         private void Update() {
@@ -63,16 +64,18 @@ namespace Unbreakable.Enemy {
 
         private void checkPlayerInRange() {
             Vector2 rbodyPosition = rbody.position;
-            RaycastHit2D hit = Physics2D.Raycast(rbodyPosition, direction, attackRange.RandomValue, layerMask);
+            RaycastHit2D hit = Physics2D.Raycast(rbodyPosition, direction, attackRange.RandomValue, targetLookupLayerMask);
         
             playerInRange = hit && hit.collider.CompareTag("Player");
+#if UNITY_EDITOR
             if(playerInRange) 
                 Debug.DrawLine(rbodyPosition, hit.point, Color.green);
             else 
                 Debug.DrawLine(rbodyPosition, rbodyPosition + direction * attackRange.Max, Color.red);
+#endif
         }
     
-        private void freeze(HitInfo obj) {
+        private void freeze(HitInfo hitInfo) {
             if (isFrozen) return;
             temporaryFreezeCoroutine = StartCoroutine(temporaryFreeze(freezeOnHitTime));
         }
@@ -86,18 +89,16 @@ namespace Unbreakable.Enemy {
             isFrozen = false;
         }
 
-
         public int getDamage() {
             return damage;
         }
 
-        public float getKnockbackForce() {
+        public float getKnockBackForce() {
             return knockbackForce;
         }
     
         private void lookAtTarget() {
-            bool flipX;
-            flipX = transform.InverseTransformPoint(target.position).x > 0.1;
+            bool flipX = transform.InverseTransformPoint(target.position).x > 0.1;
             flipX = isFlipped ? flipX : !flipX;
             spriteRenderer.flipX = flipX;
         }

@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff6c586b25eb401478645a634d4c21cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiManager: {fileID: 0}
+  currencyAmount: {fileID: 11400000, guid: d4f8d25c482442049af23b6a47bca865, type: 2}
+  pauseUIController: {fileID: 0}
+  playerPrefsManager: {fileID: 11400000, guid: 041a520bd2afe564eaf77b256d6817e3, type: 2}
 --- !u!114 &1500754840543401178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,11 +66,12 @@ MonoBehaviour:
   - {fileID: 1111635827149175836, guid: 8dc09b7e8c295f746835113d44b909dd, type: 3}
   initialNbrOfEnemiesPerWave: 15
   enemiesMultiplierPerWave: 1.2
-  spawnIntervalMin: 0.5
-  spawnIntervalMax: 5
+  spawnInterval:
+    min: 0.1
+    max: 0.1
   spawnIntervalMaxReductionPerWave: 0.5
   timeBetweenWaves: 10
-  uiManager: {fileID: 0}
+  hudManager: {fileID: 0}
 --- !u!82 &1500754840543401127
 AudioSource:
   m_ObjectHideFlags: 0

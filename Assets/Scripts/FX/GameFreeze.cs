@@ -4,11 +4,13 @@ using UnityEngine;
 namespace Unbreakable.FX {
     [RequireComponent(typeof(CollisionManager))]
     public class GameFreeze : MonoBehaviour {
+        
         [SerializeField] private float freezeTime;
-        private static bool isFrozen;
-        private static IEnumerator freezeCoroutine;
+        
+        private bool isFrozen;
+        private IEnumerator freezeCoroutine;
 
-        void Start() {
+        private void Awake() {
             GetComponent<CollisionManager>().onHit(freezeGame);
             freezeCoroutine = resumeAfter();
         }

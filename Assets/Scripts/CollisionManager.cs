@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Unbreakable {
     public class CollisionManager : MonoBehaviour {
-        [SerializeField] string hitTriggerTag;
+        [SerializeField] private string hitTriggerTag;
         private event Action<HitInfo> hitEvent;
         private string ignoreTag = string.Empty;
 

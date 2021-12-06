@@ -6,7 +6,7 @@ namespace Unbreakable.Player {
     {
         private PlayerManager playerManager;
 
-        void Start () {
+        private void Awake () {
             playerManager = GetComponent<PlayerManager> ();
         }
 

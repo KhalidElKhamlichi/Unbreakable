@@ -140,7 +140,8 @@ MonoBehaviour:
   projectileShell: {fileID: 8946343310612313194, guid: f80bd40b2697e1843b0860a59037a973, type: 3}
   shellSpread: 0.8
   shellSpeed: 5
-  nbrOfshells: 1
+  nbrOfShells: 1
+  emissionPoint: {fileID: 5072341822813065245}
 --- !u!1 &6497057828448153267
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,10 +30,6 @@ namespace Unbreakable {
         public bool isUsable() {
             return usable;
         }
-        public void setPickable(bool pickable) {
-            this.pickable = pickable;
-            Invoke(nameof(resetPickable), 1f);
-        }
 
         public bool isPickable() {
             return pickable;
@@ -46,8 +42,14 @@ namespace Unbreakable {
 
         public virtual void drop() {
             spriteRenderer.sprite = spriteWithoutArms;
+            setPickable(false);
         }
-    
+
+        private void setPickable(bool pickable) {
+            this.pickable = pickable;
+            Invoke(nameof(resetPickable), 1f);
+        }
+
         private void resetPickable() {
             pickable = true;
         }

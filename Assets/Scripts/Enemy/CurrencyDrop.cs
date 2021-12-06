@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Unbreakable.Enemy {
     public class CurrencyDrop : MonoBehaviour {
+        [SerializeField] private FloatVariable currencyAmount;
         [SerializeField] private int amount;
 
-        public int getCurrencyAmount() {
-            return amount;
+        private void OnDestroy() {
+            currencyAmount.changeValue(currencyAmount.value+amount);
         }
     }
 }

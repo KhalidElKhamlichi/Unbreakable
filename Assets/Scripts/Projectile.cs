@@ -9,7 +9,7 @@ namespace Unbreakable {
             return damage;
         }
 
-        public float getKnockbackForce() {
+        public float getKnockBackForce() {
             return knockbackForce;
         }
     }

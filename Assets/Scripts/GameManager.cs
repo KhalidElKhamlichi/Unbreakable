@@ -1,50 +1,34 @@
-﻿using System;
-using Unbreakable.Enemy;
-using Unbreakable.UI;
+﻿using Unbreakable.UI;
 using UnityEngine;
 
 namespace Unbreakable {
     public class GameManager : MonoBehaviour {
-    
-        [SerializeField] private UIManager uiManager;
-        private static int currentCurrency;
-        public static event Action<int> currencyAmountChangedEvent;
         public static bool isGamePaused;
-
+    
+        [SerializeField] private FloatVariable currencyAmount;
+        [SerializeField] private PauseUIController pauseUIController;
+        [SerializeField] private PlayerPrefsManager playerPrefsManager;
+        
+        private WaveManager waveManager;
+        
         private void Awake() {
-            currentCurrency = 0;
-            WaveManager.waveEndedEvent += saveScore;
+            currencyAmount.changeValue(0);
+            waveManager = GetComponent<WaveManager>();
+            waveManager.waveEndedEvent += saveScore;
         }
 
         private void saveScore() {
-            PlayerPrefs.SetInt("LastClearedWaveIndex", Mathf.Max(PlayerPrefs.GetInt("LastClearedWaveIndex"), WaveManager.waveIndex));
+            playerPrefsManager.setLastClearedWaveIndex(Mathf.Max(playerPrefsManager.getLastClearedWaveIndex(), waveManager.waveIndex));
         }
 
         private void Update() {
             if (Input.GetButtonDown("Pause")) {
                 if(isGamePaused) return;
                 isGamePaused = true;
-                uiManager.displayPauseUI();
+                pauseUIController.displayPauseUI();
                 Time.timeScale = 0;
             }
-        
         }
 
-        public void subscribeToEnemyDeath(GameObject enemy) {
-            enemy.GetComponent<Lifecycle>().onDeath(addCurrency);
-        }
-
-        private void addCurrency(GameObject obj) {
-            currentCurrency += obj.GetComponent<CurrencyDrop>().getCurrencyAmount();
-            currencyAmountChangedEvent?.Invoke(currentCurrency);
-        }
-
-        public static void reduceCurrency(int value) {
-            currentCurrency -= value;
-            currencyAmountChangedEvent?.Invoke(currentCurrency);
-        }
-        public static int getCurrencyAmount() {
-            return currentCurrency;
-        }
     }
 }

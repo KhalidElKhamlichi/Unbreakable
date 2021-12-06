@@ -5,27 +5,25 @@ namespace Unbreakable.UI {
     public class WaveTransitionUIController : MonoBehaviour
     {
         private static readonly int FADE_IN = Animator.StringToHash("FadeIn");
+        private const string WAVE_COMPLETE_TEXT = "WAVE {0} COMPLETE";
 
+        [SerializeField] private WaveManager waveManager;
         [SerializeField] private TextMeshProUGUI transitionText;
+        [SerializeField] private float delayBeforeTransition;
 
         private Animator waveTransitionCanvasAnimator;
 
         private void Awake() {
-            subscribeToGameEvents();
+            waveManager.waveEndedEvent += displayTransitionUI;
         }
 
         void Start() {
             waveTransitionCanvasAnimator = GetComponent<Animator>();
-            transitionText.text = $"WAVE {WaveManager.waveIndex} COMPLETE";
-        }
-
-        private void subscribeToGameEvents() {
-            WaveManager.waveEndedEvent += displayTransitionUI;
         }
 
         private void displayTransitionUI() {
-            transitionText.text = $"WAVE {WaveManager.waveIndex} COMPLETE";
-            Invoke(nameof(fadeInWaveTransition), .4f);
+            transitionText.text = string.Format(WAVE_COMPLETE_TEXT, waveManager.waveIndex);
+            Invoke(nameof(fadeInWaveTransition), delayBeforeTransition);
         }
 
         private void fadeInWaveTransition() {
@@ -33,11 +31,8 @@ namespace Unbreakable.UI {
         }
 
         private void OnDestroy() {
-            unsubscribeToGameEvents();
+            waveManager.waveEndedEvent -= displayTransitionUI;
         }
-    
-        private void unsubscribeToGameEvents() {
-            WaveManager.waveEndedEvent -= displayTransitionUI;
-        }
+
     }
 }

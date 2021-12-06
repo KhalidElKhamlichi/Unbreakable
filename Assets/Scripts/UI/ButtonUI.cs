@@ -5,8 +5,8 @@ using UnityEngine.EventSystems;
 
 namespace Unbreakable.UI {
     public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
-        [SerializeField] Color onHoverTextColor;
-        [SerializeField] Color defaultTextColor;
+        [SerializeField] private Color onHoverTextColor;
+        [SerializeField] private Color defaultTextColor;
 
         private void OnEnable() {
             GetComponentInChildren<TextMeshProUGUI>().color  = defaultTextColor;

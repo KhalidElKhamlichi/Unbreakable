@@ -54,8 +54,8 @@ namespace Unbreakable {
             return damage;
         }
 
-        public float getKnockbackForce() {
-            throw new System.NotImplementedException();
+        public float getKnockBackForce() {
+            return float.MaxValue;
         }
     }
 }

@@ -8,22 +8,23 @@ using Random = UnityEngine.Random;
 
 namespace Unbreakable {
     public class WaveManager : MonoBehaviour {
-        public static event Action waveEndedEvent;
-        public static int waveIndex = 1;
+        
+        public event Action waveEndedEvent;
+        public int waveIndex { get; private set; } = 1;
+        
         [SerializeField] private Transform spawnLocations;
         [SerializeField] private List<GameObject> enemyPrefabs;
         [SerializeField] private int initialNbrOfEnemiesPerWave;
         [SerializeField] private float enemiesMultiplierPerWave = 1;
-        [SerializeField] private float spawnIntervalMin;
-        [SerializeField] private float spawnIntervalMax;
+
+        [SerializeField] [MinMaxSlider(0.1f, 10)] private MinMax spawnInterval;
         [SerializeField] private float spawnIntervalMaxReductionPerWave = 0;
         [SerializeField] private float timeBetweenWaves;
-        [SerializeField] private UIManager uiManager;
+        [SerializeField] private HUDManager hudManager;
     
         private List<EnemyWave> waves;
         private EnemyWave currentWave;
         private int currentNbrOfEnemiesPerWave;
-        private GameManager gameManager;
         private float spawnTimer;
         private int spawnedEnemyCounter;
         private bool isInTransition;
@@ -33,11 +34,9 @@ namespace Unbreakable {
         }
 
         private void Start() {
-            gameManager = GetComponent<GameManager>();
             currentNbrOfEnemiesPerWave = initialNbrOfEnemiesPerWave;
-            currentWave = new EnemyWave(enemyPrefabs, currentNbrOfEnemiesPerWave, spawnIntervalMin, spawnIntervalMax);
+            currentWave = new EnemyWave(enemyPrefabs, currentNbrOfEnemiesPerWave, spawnInterval);
         }
-
 
         private void Update() {
             if (!currentWave.isDone()) {
@@ -47,7 +46,6 @@ namespace Unbreakable {
                     GameObject enemy = Instantiate(currentWave.getEnemy(), spawnLocation, Quaternion.identity);
                     spawnedEnemyCounter++;
                     enemy.GetComponent<Lifecycle>().onDeath(reduceEnemyCounter);
-                    gameManager.subscribeToEnemyDeath(enemy);
                     spawnTimer = currentWave.getSpawnInterval();
                 }
             } 
@@ -60,7 +58,7 @@ namespace Unbreakable {
         private IEnumerator waveTransition() {
             isInTransition = true;
             waveEndedEvent?.Invoke();
-            uiManager.updateWaveTimer(timeBetweenWaves);
+            hudManager.updateWaveTimer(timeBetweenWaves);
             yield return new WaitForSeconds(timeBetweenWaves);
             initializeNextWave();
             isInTransition = false;
@@ -73,9 +71,9 @@ namespace Unbreakable {
         private void initializeNextWave() {
             spawnTimer = 0;
             currentNbrOfEnemiesPerWave = (int) Math.Round(currentNbrOfEnemiesPerWave * enemiesMultiplierPerWave, 0);
-            spawnIntervalMax -= spawnIntervalMaxReductionPerWave;
-            spawnIntervalMax = Math.Max(spawnIntervalMin, spawnIntervalMax);
-            currentWave = new EnemyWave(enemyPrefabs, currentNbrOfEnemiesPerWave, spawnIntervalMin, spawnIntervalMax);
+            spawnInterval.Max -= spawnIntervalMaxReductionPerWave;
+            spawnInterval.Max = Math.Max(spawnInterval.Min, spawnInterval.Max);
+            currentWave = new EnemyWave(enemyPrefabs, currentNbrOfEnemiesPerWave, spawnInterval);
             waveIndex++;
         }
     

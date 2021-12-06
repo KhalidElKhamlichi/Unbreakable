@@ -4,12 +4,12 @@ using Random = UnityEngine.Random;
 
 namespace Unbreakable.FX {
     public class WeaponBreakFX : MonoBehaviour {
+        
         [SerializeField] private List<GameObject> scrapParts;
         [SerializeField] private int nbrOfPartsToSpawn;
         [SerializeField] private float minForce;
         [SerializeField] private float maxForce;
     
-        [ContextMenu("Spawn")]
         private void Start() {
             instantiateScrapParts();
             Invoke(nameof(playAudio), .1f);

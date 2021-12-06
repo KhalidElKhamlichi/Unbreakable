@@ -2,35 +2,39 @@
 using UnityEngine;
 
 namespace Unbreakable.Camera {
-    public class CameraFollow : MonoBehaviour
-    {
-
-        public GameObject player;
-        public int maxLookAhead = 5;
+    public class CameraFollow : MonoBehaviour {
+        
+        [SerializeField] private Transform player;
+        [SerializeField] private int maxLookAhead = 5;
 
         private GameObject target;
-        private CinemachineVirtualCamera camera;
+        private CinemachineVirtualCamera virtualCamera;
+        private UnityEngine.Camera camera;
 
-        private void OnEnable() {
-            camera = GetComponent<CinemachineVirtualCamera>();
-            target = new GameObject();
-            camera.Follow = target.transform;
+        private void Start() {
+            camera = UnityEngine.Camera.main;
         }
 
-        void Update() {
+        private void OnEnable() {
+            virtualCamera = GetComponent<CinemachineVirtualCamera>();
+            target = new GameObject();
+            virtualCamera.Follow = target.transform;
+        }
+
+        private void Update() {
             Vector3 mouseScreenPoint = Input.mousePosition;
             mouseScreenPoint.z = 10;
-            Vector3 mouseWorldPoint = UnityEngine.Camera.main.ScreenToWorldPoint(mouseScreenPoint);
-            Vector3 mousePositionRelativeToPlayer = player.transform.InverseTransformPoint(mouseWorldPoint);
-	    
-		
-            Vector2 targetPosition = new Vector2(mousePositionRelativeToPlayer.x/2, mousePositionRelativeToPlayer.y /2);
+            Vector3 mouseWorldPoint = camera.ScreenToWorldPoint(mouseScreenPoint);
+            Vector3 mousePositionRelativeToPlayer = player.InverseTransformPoint(mouseWorldPoint);
+            
+            Vector2 targetPosition = new Vector2(mousePositionRelativeToPlayer.x, mousePositionRelativeToPlayer.y);
 
-	    
-            if(targetPosition.magnitude > maxLookAhead)
-                targetPosition.Scale(new Vector2(maxLookAhead/targetPosition.magnitude, maxLookAhead/targetPosition.magnitude));
-	    
-            Vector2 transformPositionInWorld = player.transform.TransformPoint(targetPosition);
+            if (targetPosition.magnitude > maxLookAhead) {
+                targetPosition.Scale(new Vector2(maxLookAhead / targetPosition.magnitude,
+                    maxLookAhead / targetPosition.magnitude));
+            }
+
+            Vector2 transformPositionInWorld = player.TransformPoint(targetPosition);
             target.transform.position = transformPositionInWorld;
         }
     }

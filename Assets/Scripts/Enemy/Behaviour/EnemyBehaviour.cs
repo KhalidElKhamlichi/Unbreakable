@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
 namespace Unbreakable.Enemy.Behaviour {
-    public abstract class EnemyBehavior : ScriptableObject {
+    public abstract class EnemyBehaviour : ScriptableObject {
         
-        protected MonoBehaviour enemy;
+        protected EnemyAI enemy;
         protected Transform target;
 
-        public virtual void initialize(MonoBehaviour enemy, Transform target) {
+        public virtual void initialize(EnemyAI enemy, Transform target) {
             this.enemy = enemy;
             this.target = target;
         }

@@ -7,28 +7,26 @@ namespace Unbreakable.Enemy {
     [Serializable] 
     public class EnemyWave {
         private List<GameObject> enemyPrefabs;
-        private float spawnIntervalMin;
-        private float spawnIntervalMax;
+        private MinMax spawnInterval;
         private int totalNbrOfEnemies;
 
-        public EnemyWave(List<GameObject> enemyPrefabs, int totalNbrOfEnemies, float spawnIntervalMin, float spawnIntervalMax) {
+        public EnemyWave(List<GameObject> enemyPrefabs, int totalNbrOfEnemies, MinMax spawnInterval) {
             this.enemyPrefabs = enemyPrefabs;
             this.totalNbrOfEnemies = totalNbrOfEnemies;
-            this.spawnIntervalMin = spawnIntervalMin;
-            this.spawnIntervalMax = spawnIntervalMax;
+            this.spawnInterval = spawnInterval;
         }
 
         public GameObject getEnemy() {
             if (totalNbrOfEnemies > 0) {
                 totalNbrOfEnemies--;
-                int index = Random.Range(0, enemyPrefabs.Count);
-                return enemyPrefabs[index];
+                int randomEnemyIndex = Random.Range(0, enemyPrefabs.Count);
+                return enemyPrefabs[randomEnemyIndex];
             }
             return null;
         }
 
         public float getSpawnInterval() {
-            return Random.Range(spawnIntervalMin, spawnIntervalMax);
+            return spawnInterval.RandomValue;
         }
 
         public bool isDone() {

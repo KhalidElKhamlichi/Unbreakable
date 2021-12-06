@@ -1004,7 +1004,7 @@ GameObject:
   - component: {fileID: 2331696297229295487}
   - component: {fileID: 7601309317518693497}
   m_Layer: 0
-  m_Name: Game UI
+  m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1089,14 +1089,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183d6ba12fbe0fb42b76b1653744223c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currencyAmount: {fileID: 11400000, guid: d4f8d25c482442049af23b6a47bca865, type: 2}
   hpBar: {fileID: 2331696297143235319}
   hpBarDecay: {fileID: 2331696297707760644}
   hpDecaySpeed: 0.3
-  currencyUI: {fileID: 144232485}
   timerUI: {fileID: 605482640}
-  ammoUI: {fileID: 1939636177}
-  pauseUI: {fileID: 0}
-  pauseUIWaveIndex: {fileID: 0}
+  currencyTextMesh: {fileID: 1442975757}
+  ammoTextMesh: {fileID: 1708601042}
 --- !u!1 &2331696297408032065
 GameObject:
   m_ObjectHideFlags: 0
