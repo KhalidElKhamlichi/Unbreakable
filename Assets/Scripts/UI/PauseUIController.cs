@@ -1,4 +1,7 @@
 ﻿using TMPro;
+using Unbreakable.Gameplay;
+using Unbreakable.Gameplay.WaveSystem;
+using Unbreakable.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

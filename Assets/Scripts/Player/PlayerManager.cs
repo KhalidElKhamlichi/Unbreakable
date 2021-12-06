@@ -1,5 +1,7 @@
 ﻿using System;
 using DG.Tweening;
+using Unbreakable.Combat;
+using Unbreakable.Common;
 using UnityEngine;
 
 namespace Unbreakable.Player {

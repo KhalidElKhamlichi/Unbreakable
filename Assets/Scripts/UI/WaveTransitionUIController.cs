@@ -1,4 +1,5 @@
 ﻿using TMPro;
+using Unbreakable.Gameplay.WaveSystem;
 using UnityEngine;
 
 namespace Unbreakable.UI {

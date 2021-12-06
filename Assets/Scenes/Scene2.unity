@@ -30862,14 +30862,6 @@ PrefabInstance:
       propertyPath: hudManager
       value: 
       objectReference: {fileID: 505560732}
-    - target: {fileID: 1500754840543401178, guid: 28be245e2e432eb449c799f771317533, type: 3}
-      propertyPath: spawnInterval.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500754840543401178, guid: 28be245e2e432eb449c799f771317533, type: 3}
-      propertyPath: spawnInterval.max
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 1500754840543401179, guid: 28be245e2e432eb449c799f771317533, type: 3}
       propertyPath: m_Name
       value: Managers

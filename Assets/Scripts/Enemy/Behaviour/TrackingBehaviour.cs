@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Pathfinding;
+using Unbreakable.Util;
 using UnityEngine;
 
 namespace Unbreakable.Enemy.Behaviour {

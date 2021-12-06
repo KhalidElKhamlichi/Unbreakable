@@ -1,4 +1,6 @@
 ﻿using System;
+using Unbreakable.Combat;
+using Unbreakable.Common;
 using UnityEngine;
 
 namespace Unbreakable.FX {

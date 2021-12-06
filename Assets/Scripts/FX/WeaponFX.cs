@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unbreakable.Combat;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Unbreakable.FX {

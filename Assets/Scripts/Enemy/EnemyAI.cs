@@ -1,5 +1,8 @@
 ﻿using System.Collections;
+using Unbreakable.Combat;
+using Unbreakable.Common;
 using Unbreakable.Enemy.Behaviour;
+using Unbreakable.Util;
 using UnityEngine;
 
 namespace Unbreakable.Enemy {

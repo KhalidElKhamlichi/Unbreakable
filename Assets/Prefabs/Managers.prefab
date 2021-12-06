@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1500754840543401178}
   - component: {fileID: 1500754840543401127}
   m_Layer: 0
-  m_Name: Game Manager
+  m_Name: Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,8 +67,8 @@ MonoBehaviour:
   initialNbrOfEnemiesPerWave: 15
   enemiesMultiplierPerWave: 1.2
   spawnInterval:
-    min: 0.1
-    max: 0.1
+    min: 0.5
+    max: 5
   spawnIntervalMaxReductionPerWave: 0.5
   timeBetweenWaves: 10
   hudManager: {fileID: 0}

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unbreakable.Gameplay;
+using UnityEngine;
 
 namespace Unbreakable.Player {
     [RequireComponent(typeof(PlayerManager))]
